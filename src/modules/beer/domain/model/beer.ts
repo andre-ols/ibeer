@@ -1,6 +1,8 @@
+import { InvalidError } from '../../../core/errors/invalid'
+
 class Beer {
 	constructor(
-		readonly id: number,
+		readonly id: number | undefined,
 		readonly name: string,
 		readonly description: string,
 		readonly imageUrl: string,
@@ -17,50 +19,50 @@ class Beer {
 	}
 
 	private validate() {
-		if (this.id < 0) {
-			throw new Error('Invalid id')
+		if (this.id && this.id < 0) {
+			throw new InvalidError('id')
 		}
 		if (this.name.length < 1) {
-			throw new Error('Invalid name')
+			throw new InvalidError('name')
 		}
 		if (this.description.length < 1) {
-			throw new Error('Invalid description')
+			throw new InvalidError('description')
 		}
 		if (this.imageUrl.length < 1) {
-			throw new Error('Invalid imageUrl')
+			throw new InvalidError('imageUrl')
 		}
 		if (this.abv < 0) {
-			throw new Error('Invalid abv')
+			throw new InvalidError('abv')
 		}
 		if (this.ibu < 0) {
-			throw new Error('Invalid ibu')
+			throw new InvalidError('ibu')
 		}
 		if (this.ebc < 0) {
-			throw new Error('Invalid ebc')
+			throw new InvalidError('ebc')
 		}
 		if (this.category.length < 1) {
-			throw new Error('Invalid category')
+			throw new InvalidError('category')
 		}
 		if (isNaN(this.createdAt.getTime())) {
-			throw new Error('Invalid createdAt')
+			throw new InvalidError('createdAt')
 		}
 		if (this.createdAt.getTime() > Date.now()) {
-			throw new Error('Invalid createdAt')
+			throw new InvalidError('createdAt')
 		}
 		if (this.createdAt.getTime() > this.updatedAt.getTime()) {
-			throw new Error('Invalid createdAt')
+			throw new InvalidError('createdAt')
 		}
 		if (isNaN(this.updatedAt.getTime())) {
-			throw new Error('Invalid updatedAt')
+			throw new InvalidError('updatedAt')
 		}
 		if (this.updatedAt.getTime() > Date.now()) {
-			throw new Error('Invalid updatedAt')
+			throw new InvalidError('updatedAt')
 		}
 	}
 }
 
 export class BeerBuilder {
-	private id: number
+	private id?: number
 	private name: string
 	private description: string
 	private imageUrl: string
@@ -74,7 +76,6 @@ export class BeerBuilder {
 	private updatedAt: Date
 
 	constructor() {
-		this.id = 0
 		this.name = ''
 		this.description = ''
 		this.imageUrl = ''

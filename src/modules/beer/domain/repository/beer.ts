@@ -51,3 +51,13 @@ export namespace FindBeerRepository {
 
 	export type Result = Beer
 }
+
+export interface CreateBeerRepository {
+	execute(params: CreateBeerRepository.Params): Promise<CreateBeerRepository.Result>
+}
+
+export namespace CreateBeerRepository {
+	export type Params = Omit<Beer, 'id'>
+
+	export type Result = Beer
+}
