@@ -1,3 +1,5 @@
+import { badRequest, ok } from '../../../core/api/helpers/http-response'
+import { HttpResponse } from '../../../core/protocols/http'
 import { Pagination } from '../../../core/querying/pagination'
 import { ListBeersQuery } from '../../application/query/list-beers'
 
@@ -18,27 +20,23 @@ export namespace ListBeersController {
 		}
 	}
 
-	export type Result = {
-		statusCode: number
-		data: {
-			beers: Array<{
-				id: number
-				name: string
-				description: string
-				imageUrl: string
-				abv: number
-				ibu: number
-				ebc: number
-				category: string
-				foodPairing: string[]
-				brewersTips: string
-				createdAt: Date
-				updatedAt: Date
-			}>
-			total: number
-		}
-		error?: Error
-	}
+	export type Result = HttpResponse<{
+		beers: Array<{
+			id: number
+			name: string
+			description: string
+			imageUrl: string
+			abv: number
+			ibu: number
+			ebc: number
+			category: string
+			foodPairing: string[]
+			brewersTips: string
+			createdAt: Date
+			updatedAt: Date
+		}>
+		total: number
+	}>
 }
 
 export class ListBeersControllerImpl implements ListBeersController {
@@ -49,17 +47,19 @@ export class ListBeersControllerImpl implements ListBeersController {
 		const { search, abv, ibu, ebc, beerName, page, limit } = query
 		const params = { search, abv, ibu, ebc, beerName }
 
-		const pagination = new Pagination({
-			page,
-			limit,
-		})
+		const pagination = new Pagination()
+
+		try {
+			page ?? pagination.setPage(page)
+			limit ?? pagination.setLimit(limit)
+		} catch (error) {
+			return badRequest(error.message)
+		}
+
 		const options = { pagination }
 
 		const result = await this.listBeersQuery.execute(params, options)
 
-		return {
-			statusCode: 200,
-			data: result,
-		}
+		return ok(result)
 	}
 }
