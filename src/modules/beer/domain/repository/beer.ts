@@ -1,5 +1,19 @@
 import { Pagination } from '../../../core/querying/pagination'
 
+type Beer = {
+	id: number
+	name: string
+	description: string
+	imageUrl: string
+	abv: number
+	ibu: number
+	ebc: number
+	category: string
+	foodPairing: string[]
+	brewersTips: string
+	createdAt: Date
+	updatedAt: Date
+}
 export interface ListBeerRepository {
 	execute(
 		params: ListBeerRepository.Params,
@@ -21,20 +35,19 @@ export namespace ListBeerRepository {
 	}
 
 	export type Result = {
-		beers: Array<{
-			id: number
-			name: string
-			description: string
-			imageUrl: string
-			abv: number
-			ibu: number
-			ebc: number
-			category: string
-			foodPairing: string[]
-			brewersTips: string
-			createdAt: Date
-			updatedAt: Date
-		}>
+		beers: Array<Beer>
 		total: number
 	}
+}
+
+export interface FindBeerRepository {
+	execute(params: FindBeerRepository.Params): Promise<FindBeerRepository.Result>
+}
+
+export namespace FindBeerRepository {
+	export type Params = {
+		id: number
+	}
+
+	export type Result = Beer
 }
