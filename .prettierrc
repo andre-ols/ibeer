@@ -1,0 +1,23 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "semi": false,
+  "endOfLine": "lf",
+  "useTabs": true,
+  "singleAttributePerLine": true,
+  "jsxSingleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "quoteProps": "as-needed",
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.mts"
+      ],
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
+}
