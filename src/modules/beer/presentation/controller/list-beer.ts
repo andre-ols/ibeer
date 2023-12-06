@@ -50,8 +50,8 @@ export class ListBeersControllerImpl implements ListBeersController {
 		const pagination = new Pagination()
 
 		try {
-			page ?? pagination.setPage(page)
-			limit ?? pagination.setLimit(limit)
+			page && pagination.setPage(page)
+			limit && pagination.setLimit(limit)
 		} catch (error) {
 			return badRequest(error.message)
 		}

@@ -31,6 +31,7 @@ export class Pagination {
 	}
 
 	setPage(page: number) {
+		console.log('page', page)
 		if (page < 1) {
 			throw new Error('Page must be greater than 1')
 		}

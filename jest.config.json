@@ -1,0 +1,39 @@
+{
+  "maxWorkers": "1",
+  "rootDir": ".",
+  "testMatch": [
+    "**/*.spec.ts",
+    "**/*.e2e-spec.ts"
+  ],
+  "transform": {
+    "^.+\\.ts$": [
+      "@swc/jest",
+      {
+        "jsc": {
+          "parser": {
+            "syntax": "typescript",
+            "decorators": true
+          },
+          "transform": {
+            "legacyDecorator": true,
+            "decoratorMetadata": true
+          }
+        }
+      }
+    ]
+  },
+  "collectCoverage": true,
+  "moduleFileExtensions": [
+    "ts",
+    "js",
+    "json",
+    "node"
+  ],
+  "collectCoverageFrom": [
+    "src/modules/**/*.ts"
+  ],
+  "moduleNameMapper": {
+    "@/(.*)$": "<rootDir>/src/$1"
+  },
+  "testEnvironment": "node"
+}
