@@ -1,21 +1,21 @@
-import { ListBeersControllerImpl } from '../list-beer'
+import { ListBeerControllerImpl } from '../list-beer'
 
 const makeSut = () => {
-	const listBeersQuery = {
+	const listBeerQuery = {
 		execute: jest.fn(),
 	}
 
-	const sut = new ListBeersControllerImpl(listBeersQuery)
+	const sut = new ListBeerControllerImpl(listBeerQuery)
 
 	return {
 		sut,
-		listBeersQuery,
+		listBeerQuery,
 	}
 }
 
-describe('ListBeersControllerImpl', () => {
+describe('ListBeerControllerImpl', () => {
 	test('should return a list of beers', async () => {
-		const { sut, listBeersQuery } = makeSut()
+		const { sut, listBeerQuery } = makeSut()
 
 		const request = {
 			query: {
@@ -49,12 +49,37 @@ describe('ListBeersControllerImpl', () => {
 			total: 1,
 		}
 
-		listBeersQuery.execute.mockResolvedValueOnce(response)
+		const expectedResult = {
+			statusCode: 200,
+			data: [
+				{
+					id: 1,
+					name: 'Sample Beer',
+					description: 'A sample beer description.',
+					imageUrl: 'sample.jpg',
+					abv: 5.0,
+					ibu: 20,
+					ebc: 10,
+					category: 'Sample Category',
+					foodPairing: ['Food 1', 'Food 2'],
+					brewersTips: 'Some brewing tips.',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
+			],
+			metaData: {
+				page: 1,
+				limit: 10,
+				totalCount: 1,
+			},
+		}
+
+		listBeerQuery.execute.mockResolvedValueOnce(response)
 
 		const result = await sut.execute(request)
 
 		expect(result.statusCode).toBe(200)
-		expect(result.data).toEqual(response)
+		expect(result).toEqual(expectedResult)
 	})
 
 	test('should return a bad request error for invalid page', async () => {

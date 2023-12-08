@@ -1,15 +1,16 @@
 import { Pagination } from '../../../../core/querying/pagination'
-import { ListBeersQueryImpl } from '../list-beers'
+import { ListBeerQueryImpl } from '../list-beer'
 
 const makeSut = () => {
 	const listBeerRepository = {
 		execute: jest.fn(),
 	}
 
-	const sut = new ListBeersQueryImpl(listBeerRepository)
+	const sut = new ListBeerQueryImpl(listBeerRepository)
 
 	const listOptions = {
 		pagination: new Pagination(),
+		filters: {},
 	}
 
 	return {
@@ -19,21 +20,13 @@ const makeSut = () => {
 	}
 }
 
-describe('ListBeersQueryImpl', () => {
+describe('ListBeerQueryImpl', () => {
 	test('should call listBeerRepository.execute with the correct parameters', async () => {
 		const { sut, listBeerRepository, listOptions } = makeSut()
 
-		const params = {
-			search: 'Sample',
-			abv: 5.0,
-			ibu: 20,
-			ebc: 10,
-			beerName: 'Sample',
-		}
+		await sut.execute(listOptions)
 
-		await sut.execute(params, listOptions)
-
-		expect(listBeerRepository.execute).toHaveBeenCalledWith(params, listOptions)
+		expect(listBeerRepository.execute).toHaveBeenCalledWith(listOptions)
 	})
 
 	test('should return the result from listBeerRepository.execute', async () => {
@@ -61,7 +54,7 @@ describe('ListBeersQueryImpl', () => {
 
 		listBeerRepository.execute.mockResolvedValue(expectedResult)
 
-		const result = await sut.execute({}, listOptions)
+		const result = await sut.execute(listOptions)
 
 		expect(result).toEqual(expectedResult)
 	})
@@ -71,6 +64,6 @@ describe('ListBeersQueryImpl', () => {
 		const error = new Error('Query execution failed')
 		listBeerRepository.execute.mockRejectedValue(error)
 
-		await expect(sut.execute({}, listOptions)).rejects.toThrow(error)
+		await expect(sut.execute(listOptions)).rejects.toThrow(error)
 	})
 })

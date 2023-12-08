@@ -18,7 +18,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(400)
 			expect(response.error).toBe(error)
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
@@ -29,7 +29,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(403)
 			expect(response.error).toBe(error)
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
@@ -39,7 +39,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(401)
 			expect(response.error).toBeInstanceOf(UnauthorizedError)
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
@@ -50,7 +50,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(500)
 			expect(response.error).toBe(error)
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
@@ -72,7 +72,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(404)
 			expect(response.error).toBe(error)
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
@@ -82,7 +82,7 @@ describe('HTTP Responses', () => {
 
 			expect(response.statusCode).toBe(204)
 			expect(response.error).not.toBeDefined()
-			expect(response.data).toBeNull()
+			expect(response.data).not.toBeDefined()
 		})
 	})
 
