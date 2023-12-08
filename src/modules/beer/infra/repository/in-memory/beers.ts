@@ -135,10 +135,10 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		name: 'Session IPA Citrus Splash',
 		description:
 			'Navegue por um pomar cítrico com nossa Session IPA Citrus Splash. O aroma cítrico fresco e o perfil de sabor leve convidam você a um passeio sob o sol. Feche os olhos e sinta o frescor de lúpulos cítricos e notas de frutas enquanto saboreia esta cerveja de baixo teor alcoólico, perfeita para momentos despreocupados.',
-		imageUrl: '',
 		abv: 4,
 		ibu: 20,
 		ebc: 10,
+		imageUrl: '',
 		category: 'Session IPA',
 		foodPairing: ['Tacos de peixe', 'Salada de frutas', 'Sorvete de limão.'],
 		brewersTips:
@@ -222,7 +222,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		ibu: 28,
 		ebc: 20,
 		category: 'Dubbel',
-		foodPairing: ['Costeletas de cordeiro', '!ueijo brie', 'Sorvete de cereja.'],
+		foodPairing: ['Costeletas de cordeiro', 'Queijo brie', 'Sorvete de cereja.'],
 		brewersTips:
 			'A adição de purê de cereja durante a fermentação secundária intensifica as características frutadas desta Dubbel belga, equilibrando-se com os ésteres da levedura.',
 		createdAt: new Date(),
@@ -263,7 +263,6 @@ export const beers: ListBeerRepository.Result['beers'] = [
 	{
 		id: 17,
 		name: 'Blonde Ale com Lavanda',
-
 		description:
 			'Passeie por campos de lavanda com nossa Blonde Ale com Lavanda. A infusão de flores de lavanda secas durante a fervura cria uma experiência floral delicada. Feche os olhos e sinta-se envolvido pelo aroma suave da lavanda, enquanto cada gole é uma jornada pela beleza dos campos floridos.',
 		imageUrl: '',

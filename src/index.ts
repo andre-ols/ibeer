@@ -1,39 +1,44 @@
-import express, { Request } from 'express'
-import { ListBeerQueryImpl } from './modules/beer/application/query/list-beer'
-import { beers } from './modules/beer/infra/repository/in-memory/beers'
-import { ListBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/list-beer'
-import { ListBeerControllerImpl } from './modules/beer/presentation/controller/list-beer'
+import * as fs from 'fs'
+import * as path from 'path'
+import { promisify } from 'util'
 
-const app = express()
+const readdir = promisify(fs.readdir)
+const stat = promisify(fs.stat)
+const rename = promisify(fs.rename)
 
-app.get('/', (req: Request, res) => {
-	const { query } = req
+async function renameFiles(directory: string) {
+	try {
+		const files = await readdir(directory)
+		let count = 1
 
-	const controller = new ListBeerControllerImpl(
-		new ListBeerQueryImpl(new ListBeerInMemoryRepository(beers)),
-	)
+		for (const file of files) {
+			const filePath = path.join(directory, file)
+			const fileStat = await stat(filePath)
 
-	controller
-		.execute({
-			query: {
-				abv: query.abv ? Number(query.abv) : undefined,
-				ebc: query.ebc ? Number(query.ebc) : undefined,
-				ibu: query.ibu ? Number(query.ibu) : undefined,
-				name: query.name as string,
-				limit: query.limit ? Number(query.limit) : undefined,
-				page: query.page ? Number(query.page) : undefined,
-			},
-		})
-		.then((result) => {
-			res.status(result.statusCode).json(result)
-		})
-		.catch((error) => {
-			res.status(500).send({
-				error: error.message,
-			})
-		})
-})
+			if (fileStat.isDirectory()) {
+				// Se for um diretório, chama a função recursivamente
+				await renameFiles(filePath)
+				// Zera a contagem para cada pasta
+				count = 1
+			} else {
+				// Se o nome do arquivo não for "fg-image", renomeia para "image" + contagem incremental
+				if (file !== 'fg-image.png') {
+					const newFileName = `image-${count}.jfif`
+					await rename(filePath, path.join(directory, newFileName))
+					count++
+				}
+			}
+		}
+	} catch (error) {
+		console.error(`Erro ao renomear arquivos: ${error}`)
+	}
+}
 
-app.listen(3000, () => {
-	console.log('Server listening on port 3000')
-})
+const pastaAssets = path.join(__dirname, '..', 'assets')
+// Substitua 'caminho/para/sua/pasta' pelo caminho da sua pasta 'assets'
+
+console.log('Iniciando renomeação de arquivos...', pastaAssets)
+
+renameFiles(pastaAssets)
+	.then(() => console.log('Renomeação concluída com sucesso!'))
+	.catch((error) => console.error(`Erro ao renomear arquivos: ${error}`))
