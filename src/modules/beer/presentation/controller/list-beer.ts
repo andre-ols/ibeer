@@ -1,27 +1,26 @@
 import { badRequest, ok } from '../../../core/api/helpers/http-response'
 import { HttpResponse } from '../../../core/protocols/http'
 import { Pagination } from '../../../core/querying/pagination'
-import { ListBeersQuery } from '../../application/query/list-beers'
+import { ListBeerQuery } from '../../application/query/list-beer'
 
-export interface ListBeersController {
-	execute(request: ListBeersController.Request): Promise<ListBeersController.Result>
+export interface ListBeerController {
+	execute(request: ListBeerController.Request): Promise<ListBeerController.Result>
 }
 
-export namespace ListBeersController {
+export namespace ListBeerController {
 	export type Request = {
 		query: {
-			search?: string
 			abv?: number
 			ibu?: number
 			ebc?: number
-			beerName?: string
+			name?: string
 			page?: number
 			limit?: number
 		}
 	}
 
-	export type Result = HttpResponse<{
-		beers: Array<{
+	export type Result = HttpResponse<
+		Array<{
 			id: number
 			name: string
 			description: string
@@ -35,17 +34,16 @@ export namespace ListBeersController {
 			createdAt: Date
 			updatedAt: Date
 		}>
-		total: number
-	}>
+	>
 }
 
-export class ListBeersControllerImpl implements ListBeersController {
-	constructor(private readonly listBeersQuery: ListBeersQuery) {}
+export class ListBeerControllerImpl implements ListBeerController {
+	constructor(private readonly listBeerQuery: ListBeerQuery) {}
 
-	async execute(request: ListBeersController.Request): Promise<ListBeersController.Result> {
+	async execute(request: ListBeerController.Request): Promise<ListBeerController.Result> {
 		const { query } = request
-		const { search, abv, ibu, ebc, beerName, page, limit } = query
-		const params = { search, abv, ibu, ebc, beerName }
+		const { abv, ibu, ebc, name, page, limit } = query
+		const params = { abv, ibu, ebc, name }
 
 		const pagination = new Pagination()
 
@@ -56,10 +54,14 @@ export class ListBeersControllerImpl implements ListBeersController {
 			return badRequest(error.message)
 		}
 
-		const options = { pagination }
+		const options: ListBeerQuery.Options = { pagination, filters: params }
 
-		const result = await this.listBeersQuery.execute(params, options)
+		const result = await this.listBeerQuery.execute(options)
 
-		return ok(result)
+		return ok(result.beers, {
+			page: pagination.getPage(),
+			limit: pagination.getLimit(),
+			totalCount: result.total,
+		})
 	}
 }

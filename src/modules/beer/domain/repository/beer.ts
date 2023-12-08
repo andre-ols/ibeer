@@ -15,23 +15,18 @@ type Beer = {
 	updatedAt: Date
 }
 export interface ListBeerRepository {
-	execute(
-		params: ListBeerRepository.Params,
-		options: ListBeerRepository.Options,
-	): Promise<ListBeerRepository.Result>
+	execute(options: ListBeerRepository.Options): Promise<ListBeerRepository.Result>
 }
 
 export namespace ListBeerRepository {
-	export type Params = {
-		search?: string
-		abv?: number
-		ibu?: number
-		ebc?: number
-		beerName?: string
-	}
-
 	export type Options = {
 		pagination: Pagination
+		filters: {
+			abv?: number
+			ibu?: number
+			ebc?: number
+			name?: string
+		}
 	}
 
 	export type Result = {
