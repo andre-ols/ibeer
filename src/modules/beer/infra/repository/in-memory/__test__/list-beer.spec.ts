@@ -1,9 +1,10 @@
 import { Pagination } from '../../../../../core/querying/pagination'
 import { ListBeerRepository } from '../../../../domain/repository/beer'
+import { DataBeer } from '../beers'
 import { ListBeerInMemoryRepository } from '../list-beer'
 
 const makeSut = () => {
-	const beers: ListBeerRepository.Result['beers'] = []
+	const beers: Array<DataBeer> = []
 
 	const sut = new ListBeerInMemoryRepository(beers)
 
@@ -25,7 +26,7 @@ describe('ListBeerInMemoryRepository', () => {
 		const { sut, options, beers } = makeSut()
 
 		beers.push({
-			id: 1,
+			id: 'id-1',
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
 			imageUrl: 'sample.jpg',
@@ -46,7 +47,7 @@ describe('ListBeerInMemoryRepository', () => {
 		expect(result).toEqual({
 			beers: [
 				{
-					id: 1,
+					id: 'id-1',
 					name: 'Sample Beer',
 					description: 'A sample beer description.',
 					imageUrl: 'sample.jpg',
@@ -69,7 +70,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -84,7 +85,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -105,7 +106,7 @@ describe('ListBeerInMemoryRepository', () => {
 			expect(result).toEqual({
 				beers: [
 					{
-						id: 1,
+						id: 'id-1',
 						name: 'Sample Beer',
 						description: 'A sample beer description.',
 						imageUrl: 'sample.jpg',
@@ -127,7 +128,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -142,7 +143,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -172,7 +173,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -187,7 +188,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -208,7 +209,7 @@ describe('ListBeerInMemoryRepository', () => {
 			expect(result).toEqual({
 				beers: [
 					{
-						id: 1,
+						id: 'id-1',
 						name: 'Sample Beer',
 						description: 'A sample beer description.',
 						imageUrl: 'sample.jpg',
@@ -230,7 +231,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -245,7 +246,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -275,7 +276,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -290,7 +291,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -311,7 +312,7 @@ describe('ListBeerInMemoryRepository', () => {
 			expect(result).toEqual({
 				beers: [
 					{
-						id: 1,
+						id: 'id-1',
 						name: 'Sample Beer',
 						description: 'A sample beer description.',
 						imageUrl: 'sample.jpg',
@@ -333,7 +334,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -348,7 +349,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -378,7 +379,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -393,7 +394,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -414,7 +415,7 @@ describe('ListBeerInMemoryRepository', () => {
 			expect(result).toEqual({
 				beers: [
 					{
-						id: 1,
+						id: 'id-1',
 						name: 'Sample Beer',
 						description: 'A sample beer description.',
 						imageUrl: 'sample.jpg',
@@ -436,7 +437,7 @@ describe('ListBeerInMemoryRepository', () => {
 			const { sut, options, beers } = makeSut()
 
 			beers.push({
-				id: 1,
+				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',
@@ -451,7 +452,7 @@ describe('ListBeerInMemoryRepository', () => {
 			})
 
 			beers.push({
-				id: 2,
+				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
 				imageUrl: 'sample.jpg',

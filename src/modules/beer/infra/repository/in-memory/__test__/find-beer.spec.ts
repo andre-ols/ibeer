@@ -1,8 +1,8 @@
-import { ListBeerRepository } from '../../../../domain/repository/beer'
+import { DataBeer } from '../beers'
 import { FindBeerInMemoryRepository } from '../find-beer'
 
 const makeSut = () => {
-	const beers: ListBeerRepository.Result['beers'] = []
+	const beers: Array<DataBeer> = []
 	const sut = new FindBeerInMemoryRepository(beers)
 
 	return {
@@ -16,7 +16,7 @@ describe('FindBeerInMemoryRepository', () => {
 		const { sut, beers } = makeSut()
 
 		const beer = {
-			id: 1,
+			id: 'id',
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
 			imageUrl: 'sample.jpg',
@@ -40,7 +40,7 @@ describe('FindBeerInMemoryRepository', () => {
 	test('should throw if beer is not found', async () => {
 		const { sut } = makeSut()
 
-		const promise = sut.execute({ id: 1 })
+		const promise = sut.execute({ id: 'id' })
 
 		await expect(promise).rejects.toThrow()
 	})

@@ -11,7 +11,7 @@ describe('Beer', () => {
 		test('should create a valid Beer instance', () => {
 			const { sut } = makeSut()
 			const beer = sut
-				.withId(1)
+				.withId('id')
 				.withName('Sample Beer')
 				.withDescription('A sample beer description.')
 				.withImageUrl('sample.jpg')
@@ -36,7 +36,7 @@ describe('Beer', () => {
 
 		test('should throw an error for invalid id', () => {
 			expect(() => {
-				new BeerBuilder().withId(-1).build()
+				new BeerBuilder().withId('').build()
 			}).toThrow()
 		})
 

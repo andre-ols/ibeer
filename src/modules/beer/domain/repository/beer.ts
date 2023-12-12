@@ -1,19 +1,8 @@
 import { Pagination } from '../../../core/querying/pagination'
+import { BeerBuilder } from '../model/beer'
 
-type Beer = {
-	id: number
-	name: string
-	description: string
-	imageUrl: string
-	abv: number
-	ibu: number
-	ebc: number
-	category: string
-	foodPairing: string[]
-	brewersTips: string
-	createdAt: Date
-	updatedAt: Date
-}
+type Beer = ReturnType<BeerBuilder['build']>
+
 export interface ListBeerRepository {
 	execute(options: ListBeerRepository.Options): Promise<ListBeerRepository.Result>
 }
@@ -41,7 +30,7 @@ export interface FindBeerRepository {
 
 export namespace FindBeerRepository {
 	export type Params = {
-		id: number
+		id: string
 	}
 
 	export type Result = Beer

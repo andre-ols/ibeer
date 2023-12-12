@@ -1,12 +1,15 @@
 import express, { Request } from 'express'
+import { FindBeerQueryImpl } from './modules/beer/application/query/find-beer'
 import { ListBeerQueryImpl } from './modules/beer/application/query/list-beer'
 import { beers } from './modules/beer/infra/repository/in-memory/beers'
+import { FindBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/find-beer'
 import { ListBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/list-beer'
+import { FindBeerControllerImpl } from './modules/beer/presentation/controller/find-beer'
 import { ListBeerControllerImpl } from './modules/beer/presentation/controller/list-beer'
 
 const app = express()
 
-app.get('/', (req: Request, res) => {
+app.get('/beer', (req: Request, res) => {
 	const { query } = req
 
 	const controller = new ListBeerControllerImpl(
@@ -25,6 +28,7 @@ app.get('/', (req: Request, res) => {
 			},
 		})
 		.then((result) => {
+			console.log(result)
 			res.status(result.statusCode).json(result)
 		})
 		.catch((error) => {
@@ -34,6 +38,32 @@ app.get('/', (req: Request, res) => {
 		})
 })
 
-app.listen(3000, () => {
+app.get('/beer/:id', (req: Request, res) => {
+	const { id } = req.params
+
+	const controller = new FindBeerControllerImpl(
+		new FindBeerQueryImpl(new FindBeerInMemoryRepository(beers)),
+	)
+
+	controller
+		.execute({
+			params: {
+				id: Number(id),
+			},
+		})
+		.then((result) => {
+			res.status(result.statusCode).json(result)
+		})
+		.catch((error) => {
+			res.status(500).send({
+				error: error.message,
+			})
+		})
+})
+
+// servir a pasta assets como estática
+app.use('/assets', express.static('assets'))
+
+app.listen(3333, () => {
 	console.log('Server listening on port 3000')
 })

@@ -1,8 +1,9 @@
+import { randomUUID } from 'crypto'
 import { InvalidError } from '../../../core/errors/invalid'
 
-class Beer {
+export class Beer {
 	constructor(
-		readonly id: number | undefined,
+		readonly id: string,
 		readonly name: string,
 		readonly description: string,
 		readonly imageUrl: string,
@@ -19,7 +20,7 @@ class Beer {
 	}
 
 	private validate() {
-		if (this.id && this.id < 0) {
+		if (!this.id) {
 			throw new InvalidError('id')
 		}
 		if (this.name.length < 1) {
@@ -59,10 +60,27 @@ class Beer {
 			throw new InvalidError('updatedAt')
 		}
 	}
+
+	toJSON() {
+		return {
+			id: this.id,
+			name: this.name,
+			description: this.description,
+			imageUrl: this.imageUrl,
+			abv: this.abv,
+			ibu: this.ibu,
+			ebc: this.ebc,
+			category: this.category,
+			foodPairing: this.foodPairing,
+			brewersTips: this.brewersTips,
+			createdAt: this.createdAt,
+			updatedAt: this.updatedAt,
+		}
+	}
 }
 
 export class BeerBuilder {
-	private id?: number
+	private id: string
 	private name: string
 	private description: string
 	private imageUrl: string
@@ -76,6 +94,7 @@ export class BeerBuilder {
 	private updatedAt: Date
 
 	constructor() {
+		this.id = randomUUID()
 		this.name = ''
 		this.description = ''
 		this.imageUrl = ''
@@ -89,7 +108,7 @@ export class BeerBuilder {
 		this.updatedAt = new Date()
 	}
 
-	withId(id: number): BeerBuilder {
+	withId(id: string): BeerBuilder {
 		this.id = id
 		return this
 	}

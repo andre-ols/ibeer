@@ -32,18 +32,20 @@ describe('ListBeerControllerImpl', () => {
 		const response = {
 			beers: [
 				{
-					id: 1,
-					name: 'Sample Beer',
-					description: 'A sample beer description.',
-					imageUrl: 'sample.jpg',
-					abv: 5.0,
-					ibu: 20,
-					ebc: 10,
-					category: 'Sample Category',
-					foodPairing: ['Food 1', 'Food 2'],
-					brewersTips: 'Some brewing tips.',
-					createdAt: new Date('2023-01-01'),
-					updatedAt: new Date('2023-01-01'),
+					toJSON: jest.fn().mockReturnValue({
+						id: 'id',
+						name: 'Sample Beer',
+						description: 'A sample beer description.',
+						imageUrl: 'sample.jpg',
+						abv: 5.0,
+						ibu: 20,
+						ebc: 10,
+						category: 'Sample Category',
+						foodPairing: ['Food 1', 'Food 2'],
+						brewersTips: 'Some brewing tips.',
+						createdAt: new Date('2023-01-01'),
+						updatedAt: new Date('2023-01-01'),
+					}),
 				},
 			],
 			total: 1,
@@ -53,7 +55,7 @@ describe('ListBeerControllerImpl', () => {
 			statusCode: 200,
 			data: [
 				{
-					id: 1,
+					id: 'id',
 					name: 'Sample Beer',
 					description: 'A sample beer description.',
 					imageUrl: 'sample.jpg',

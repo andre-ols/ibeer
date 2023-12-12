@@ -21,7 +21,7 @@ export namespace ListBeerController {
 
 	export type Result = HttpResponse<
 		Array<{
-			id: number
+			id: string
 			name: string
 			description: string
 			imageUrl: string
@@ -58,7 +58,9 @@ export class ListBeerControllerImpl implements ListBeerController {
 
 		const result = await this.listBeerQuery.execute(options)
 
-		return ok(result.beers, {
+		const jsonBeers = result.beers.map((beer) => beer.toJSON())
+
+		return ok(jsonBeers, {
 			page: pagination.getPage(),
 			limit: pagination.getLimit(),
 			totalCount: result.total,

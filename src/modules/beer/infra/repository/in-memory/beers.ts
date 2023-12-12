@@ -1,8 +1,23 @@
-import { ListBeerRepository } from '../../../domain/repository/beer'
+import { randomUUID } from 'crypto'
 
-export const beers: ListBeerRepository.Result['beers'] = [
+export type DataBeer = {
+	id: string
+	name: string
+	description: string
+	imageUrl: string
+	abv: number
+	ibu: number
+	ebc: number
+	category: string
+	foodPairing: string[]
+	brewersTips: string
+	createdAt: Date
+	updatedAt: Date
+}
+
+export const beers: Array<DataBeer> = [
 	{
-		id: 1,
+		id: randomUUID(),
 		name: 'Berliner Weisse With Yuzu - B-Sides',
 		description:
 			'Mergulhe em uma jornada gustativa única com nossa Berliner Weisse com Yuzu. O alemão encontra o japonês enquanto o aroma cítrico do Yuzu dança no ar. A fermentação com levedura de lager em temperaturas ale cria uma experiência refrescante e efervescente. Feche os olhos e sinta a crocância de uma lager misturada à frutuosidade exótica de uma ale, transportando-o para um jardim de citros sob o sol japonês.',
@@ -18,7 +33,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 2,
+		id: randomUUID(),
 		name: 'IPA Tropical Burst',
 		description:
 			'Sinta a explosão tropical em cada gole! Nossa IPA Tropical Burst é uma jornada pelos trópicos, onde lúpulos tropicais se misturam em uma dança aromática. Feche os olhos e imagine-se em uma ilha paradisíaca enquanto saboreia as notas intensas de manga, maracujá e abacaxi. Uma experiência sensorial que eleva a IPA a um novo patamar de frescor e sabor.',
@@ -34,7 +49,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 3,
+		id: randomUUID(),
 		name: 'Stout Café Imperial',
 		description:
 			'Adentre um café artesanal com nossa Stout Café Imperial. O aroma de grãos de café torrados preenche o ar, enquanto cada gole revela camadas de complexidade. A infusão de café imperial durante a maturação proporciona uma riqueza profunda de sabores de café, complementada pela suavidade da levedura. Feche os olhos e sinta-se em uma cafeteria aconchegante, explorando nuances de torrefação e cafeína.',
@@ -50,7 +65,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 4,
+		id: randomUUID(),
 		name: 'Saison de Pêssego da Província',
 		description:
 			'Viaje para os campos de pêssegos na Provence com nossa Saison de Pêssego. Cada gole é como uma brisa fresca carregada com a doçura suculenta dos pêssegos locais. A levedura saison adiciona notas frutadas, enquanto a suavidade da cerveja evoca a sensação de um dia ensolarado. Feche os olhos e transporte-se para uma praia tropical, onde cada gole é como um mergulho revigorante no mar.',
@@ -66,7 +81,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 5,
+		id: randomUUID(),
 		name: 'Golden Honey Ale',
 		description:
 			'Experimente a doçura dourada em cada gota da nossa Golden Honey Ale. O mel cru adicionado no final da fervura empresta uma doçura floral que se equilibra perfeitamente com a base maltada. Feche os olhos e imagine-se em um campo de flores silvestres, com o néctar dourado da cerveja acariciando seu paladar, criando uma experiência única e celestial.',
@@ -82,7 +97,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 6,
+		id: randomUUID(),
 		name: 'Gose de Melancia Refrescante',
 		description:
 			'Sinta a brisa do oceano enquanto desfruta de nossa Gose de Melancia Refrescante. A melancia adicionada durante a fermentação mistura-se ao sal marinho, proporcionando uma experiência salgada e doce. Feche os olhos e imagine-se em uma praia tropical, onde cada gole é como um mergulho revigorante no mar.',
@@ -98,7 +113,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 7,
+		id: randomUUID(),
 		name: 'Tripel Belga Dourada',
 		description:
 			'Entre em um mosteiro belga com nossa Tripel Belga Dourada. Cada gole é uma jornada espiritual, onde a cepa de levedura belga cria uma sinfonia de ésteres frutados e notas condimentadas. Feche os olhos e sinta-se cercado pelo aroma celestial, enquanto a complexidade maltada e a secura no final elevam a experiência a um nível divino.',
@@ -115,7 +130,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 	},
 
 	{
-		id: 8,
+		id: randomUUID(),
 		name: 'Amber Ale de Caramelo',
 		description:
 			'Adentre uma confeitaria com nossa Amber Ale de Caramelo. A adição de maltes caramelizados durante a brassagem cria um espetáculo de caramelo, equilibrado pela harmonia entre maltes e lúpulos. Feche os olhos e imagine-se em um mundo de sabores aveludados, onde cada gole é uma indulgência reconfortante.',
@@ -131,7 +146,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 9,
+		id: randomUUID(),
 		name: 'Session IPA Citrus Splash',
 		description:
 			'Navegue por um pomar cítrico com nossa Session IPA Citrus Splash. O aroma cítrico fresco e o perfil de sabor leve convidam você a um passeio sob o sol. Feche os olhos e sinta o frescor de lúpulos cítricos e notas de frutas enquanto saboreia esta cerveja de baixo teor alcoólico, perfeita para momentos despreocupados.',
@@ -147,7 +162,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 10,
+		id: randomUUID(),
 		name: 'Rye Pale Ale Picante',
 		description:
 			'Entre em um jardim de especiarias com nossa Rye Pale Ale Picante. Cada gole é uma explosão de sabores, com o centeio adicionando um toque picante e terroso. Feche os olhos e imagine-se entre campos de grãos de centeio, explorando um mundo de complexidade e sabor.',
@@ -164,7 +179,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 	},
 
 	{
-		id: 11,
+		id: randomUUID(),
 		name: 'Double Chocolate Porter',
 		description:
 			'Delicie-se em uma chocolateria com nossa Double Chocolate Porter. O cacau em pó e os nibs de cacau adicionados durante a fervura criam uma experiência decadente de chocolate. Feche os olhos e deixe-se envolver pela riqueza e suavidade, como se estivesse saboreando um pedaço de chocolate gourmet.',
@@ -180,7 +195,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 12,
+		id: randomUUID(),
 		name: 'Hoppy Wheat Beer',
 		description:
 			'Passeie por um campo de lúpulos com nossa Hoppy Wheat Beer. A base suave de trigo maltado é a tela perfeita para uma explosão de aromas lupulados. Feche os olhos e sinta-se imerso em uma plantação de lúpulos, onde cada gole é uma celebração de frescor e vitalidade.',
@@ -196,7 +211,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 13,
+		id: randomUUID(),
 		name: 'Barleywine Envelhecida em Barril de Carvalho',
 		description:
 			'Entre em uma sala de barris de carvalho com nossa Barleywine envelhecida. Cada gole é uma jornada pelo tempo, com as notas de baunilha e carvalho dançando no paladar. Feche os olhos e imagine-se entre barris envelhecidos, onde a maturação prolongada eleva esta cerveja a uma obra-prima de complexidade e suavidade.',
@@ -213,7 +228,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 	},
 
 	{
-		id: 14,
+		id: randomUUID(),
 		name: 'Belgian Dubbel de Cereja',
 		description:
 			'Delicie-se em um pomar de cerejeiras com nossa Belgian Dubbel de Cereja. A adição de purê de cereja durante a fermentação secundária proporciona uma explosão de sabores frutados. Feche os olhos e sinta-se envolvido pelo aroma suave da lavanda, enquanto cada gole é uma jornada pela beleza dos campos floridos.',
@@ -229,7 +244,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 15,
+		id: randomUUID(),
 		name: 'Porter Defumada com Chipotle',
 		description:
 			'Explore uma fogueira defumada com nossa Porter Defumada com Chipotle. Os maltes defumados e a pimenta chipotle adicionada durante a fervura criam um espetáculo de sabores defumados e picantes. Feche os olhos e imagine-se junto a uma fogueira, onde a ousadia desta cerveja desperta seus sentidos.',
@@ -245,7 +260,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 16,
+		id: randomUUID(),
 		name: 'Fruit Punch Gose',
 		description:
 			'Mergulhe em um paraíso tropical com nossa Fruit Punch Gose. A adição de purês de frutas tropicais durante a fermentação proporciona uma explosão de frescor. Feche os olhos e imagine-se em uma ilha paradisíaca, onde cada gole é como um soco de frutas refrescante, equilibrado pelo toque salgado.',
@@ -261,7 +276,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 17,
+		id: randomUUID(),
 		name: 'Blonde Ale com Lavanda',
 		description:
 			'Passeie por campos de lavanda com nossa Blonde Ale com Lavanda. A infusão de flores de lavanda secas durante a fervura cria uma experiência floral delicada. Feche os olhos e sinta-se envolvido pelo aroma suave da lavanda, enquanto cada gole é uma jornada pela beleza dos campos floridos.',
@@ -278,7 +293,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 	},
 
 	{
-		id: 18,
+		id: randomUUID(),
 		name: 'Red Rye IPA',
 		description:
 			'Percorra uma plantação de centeio com nossa Red Rye IPA. A combinação de maltes de centeio e lúpulos cítricos proporciona uma experiência única. Feche os olhos e imagine-se entre campos de centeio balançando ao vento, enquanto cada gole é uma celebração de picância e sabor.',
@@ -294,7 +309,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 19,
+		id: randomUUID(),
 		name: 'Weizenbock de Banana e Canela',
 		description:
 			'Viaje para um mercado de especiarias com nossa Weizenbock de Banana e Canela. A cepa de levedura de trigo desenvolve intensos ésteres de banana, enquanto a canela adiciona um toque de especiaria. Feche os olhos e sinta-se imerso em um mercado exótico, onde cada gole é uma experiência sensorial repleta de sabores tropicais.',
@@ -310,7 +325,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		updatedAt: new Date(),
 	},
 	{
-		id: 20,
+		id: randomUUID(),
 		name: 'Sour Ale de Morango e Manjericão',
 		description:
 			'Explore um jardim de morangos com nossa Sour Ale de Morango e Manjericão. A adição de morangos frescos e manjericão durante a fermentação proporciona uma mistura refrescante e ácida. Feche os olhos e imagine-se entre canteiros de morangos maduros, enquanto cada gole é uma explosão de frescor e sofisticação.',
@@ -325,4 +340,7 @@ export const beers: ListBeerRepository.Result['beers'] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 	},
-]
+].map((beer) => ({
+	...beer,
+	imageUrl: `/assets/${beer.name}/fg-image.png`,
+}))
