@@ -41,7 +41,7 @@ export interface CreateBeerRepository {
 }
 
 export namespace CreateBeerRepository {
-	export type Params = Omit<Beer, 'id'>
+	export type Params = Beer
 
 	export type Result = Beer
 }

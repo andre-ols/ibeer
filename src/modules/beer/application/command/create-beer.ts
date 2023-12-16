@@ -19,7 +19,7 @@ export namespace CreateBeerCommand {
 	}
 
 	export type Result = {
-		id: number
+		id: string
 		name: string
 		description: string
 		imageUrl: string
@@ -50,18 +50,6 @@ export class CreateBeerCommandImpl implements CreateBeerCommand {
 			.withBrewersTips(params.brewersTips)
 			.build()
 
-		return this.beerRepository.execute({
-			name: beer.name,
-			description: beer.description,
-			imageUrl: beer.imageUrl,
-			abv: beer.abv,
-			ibu: beer.ibu,
-			ebc: beer.ebc,
-			foodPairing: beer.foodPairing,
-			brewersTips: beer.brewersTips,
-			category: beer.category,
-			createdAt: beer.createdAt,
-			updatedAt: beer.updatedAt,
-		})
+		return this.beerRepository.execute(beer)
 	}
 }
