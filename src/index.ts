@@ -29,7 +29,10 @@ app.get('/beer', (req: Request, res) => {
 		})
 		.then((result) => {
 			console.log(result)
-			res.status(result.statusCode).json(result)
+			res.status(result.statusCode).json({
+				...result,
+				statusCode: undefined,
+			})
 		})
 		.catch((error) => {
 			res.status(500).send({
@@ -48,11 +51,14 @@ app.get('/beer/:id', (req: Request, res) => {
 	controller
 		.execute({
 			params: {
-				id: Number(id),
+				id: id,
 			},
 		})
 		.then((result) => {
-			res.status(result.statusCode).json(result)
+			res.status(result.statusCode).json({
+				...result,
+				statusCode: undefined,
+			})
 		})
 		.catch((error) => {
 			res.status(500).send({

@@ -9,12 +9,12 @@ export interface FindBeerController {
 export namespace FindBeerController {
 	export type Request = {
 		params: {
-			id: number
+			id: string
 		}
 	}
 
 	export type Result = HttpResponse<{
-		id: number
+		id: string
 		name: string
 		description: string
 		imageUrl: string
