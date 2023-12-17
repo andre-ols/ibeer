@@ -1,8 +1,18 @@
+import { Abv } from '../../value-object/abv'
+import { CreatedAt } from '../../value-object/created-at'
+import { Ebc } from '../../value-object/ebc'
+import { Ibu } from '../../value-object/ibu'
+import { UpdatedAt } from '../../value-object/updated-at'
 import { BeerBuilder } from '../beer'
+import { CategoryBuilder } from '../category'
 
 const makeSut = () => {
+	const category = new CategoryBuilder().withName('Sample Category')
+	const ebc = new Ebc(15)
+	const ibu = new Ibu(10)
+	const abv = new Abv(5)
 	return {
-		sut: new BeerBuilder(),
+		sut: new BeerBuilder().withCategory(category.build()).withEbc(ebc).withIbu(ibu).withAbv(abv),
 	}
 }
 
@@ -10,19 +20,14 @@ describe('Beer', () => {
 	describe('constructor', () => {
 		test('should create a valid Beer instance', () => {
 			const { sut } = makeSut()
+			console.log(sut)
+			console.log('AAAAAAAAAAAAAAAA')
 			const beer = sut
-				.withId('id')
 				.withName('Sample Beer')
 				.withDescription('A sample beer description.')
 				.withImageUrl('sample.jpg')
-				.withAbv(5.0)
-				.withIbu(20)
-				.withEbc(10)
-				.withCategory('Sample Category')
 				.withFoodPairing(['Food 1', 'Food 2'])
 				.withBrewersTips('Some brewing tips.')
-				.withCreatedAt(new Date('2023-01-01'))
-				.withUpdatedAt(new Date('2023-01-01'))
 				.build()
 
 			expect(beer).toBeTruthy()
@@ -58,30 +63,6 @@ describe('Beer', () => {
 			}).toThrow()
 		})
 
-		test('should throw an error for invalid abv', () => {
-			expect(() => {
-				new BeerBuilder().withAbv(-1).build()
-			}).toThrow()
-		})
-
-		test('should throw an error for invalid ibu', () => {
-			expect(() => {
-				new BeerBuilder().withIbu(-1).build()
-			}).toThrow()
-		})
-
-		test('should throw an error for invalid ebc', () => {
-			expect(() => {
-				new BeerBuilder().withEbc(-1).build()
-			}).toThrow()
-		})
-
-		test('should throw an error for invalid category', () => {
-			expect(() => {
-				new BeerBuilder().withCategory('').build()
-			}).toThrow()
-		})
-
 		test('should throw an error for invalid foodPairing', () => {
 			expect(() => {
 				new BeerBuilder().withFoodPairing([]).build()
@@ -94,24 +75,13 @@ describe('Beer', () => {
 			}).toThrow()
 		})
 
-		test('should throw an error for invalid createdAt', () => {
-			expect(() => {
-				new BeerBuilder().withCreatedAt(new Date('1990-01-01')).build()
-			}).toThrow()
-		})
-
 		test('should throw an error if createdAt is greater than updatedAt', () => {
 			expect(() => {
-				new BeerBuilder()
-					.withCreatedAt(new Date('2023-01-01'))
-					.withUpdatedAt(new Date('2022-01-01'))
+				const { sut } = makeSut()
+				sut
+					.withCreatedAt(new CreatedAt(new Date('2022-01-01')))
+					.withUpdatedAt(new UpdatedAt(new Date('2021-01-01')))
 					.build()
-			}).toThrow()
-		})
-
-		test('should throw an error for invalid updatedAt', () => {
-			expect(() => {
-				new BeerBuilder().withUpdatedAt(new Date('1990-01-01')).build()
 			}).toThrow()
 		})
 	})

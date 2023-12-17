@@ -28,7 +28,6 @@ app.get('/beer', (req: Request, res) => {
 			},
 		})
 		.then((result) => {
-			console.log(result)
 			res.status(result.statusCode).json({
 				...result,
 				statusCode: undefined,
