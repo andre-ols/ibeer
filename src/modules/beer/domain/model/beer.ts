@@ -55,8 +55,8 @@ export class Beer {
 			category: this.category.toJSON(),
 			foodPairing: this.foodPairing,
 			brewersTips: this.brewersTips,
-			createdAt: this.createdAt,
-			updatedAt: this.updatedAt,
+			createdAt: this.createdAt.getValue(),
+			updatedAt: this.updatedAt.getValue(),
 		}
 	}
 }

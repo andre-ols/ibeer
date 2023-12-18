@@ -20,8 +20,6 @@ describe('Beer', () => {
 	describe('constructor', () => {
 		test('should create a valid Beer instance', () => {
 			const { sut } = makeSut()
-			console.log(sut)
-			console.log('AAAAAAAAAAAAAAAA')
 			const beer = sut
 				.withName('Sample Beer')
 				.withDescription('A sample beer description.')

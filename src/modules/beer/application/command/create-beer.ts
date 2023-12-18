@@ -1,55 +1,47 @@
 import { BeerBuilder } from '../../domain/model/beer'
+import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'
+import { Abv } from '../../domain/value-object/abv'
+import { Ebc } from '../../domain/value-object/ebc'
+import { Ibu } from '../../domain/value-object/ibu'
 
-export interface CreateBeerCommand {
-	execute(params: CreateBeerCommand.Params): Promise<CreateBeerCommand.Result>
-}
+export class CreateBeerCommand {
+	name: string
+	description: string
+	imageUrl: string
+	category: string
+	abv: number
+	ibu: number
+	ebc: number
+	foodPairing: string[]
+	brewersTips: string
 
-export namespace CreateBeerCommand {
-	export type Params = {
-		name: string
-		description: string
-		imageUrl: string
-		category: string
-		abv: number
-		ibu: number
-		ebc: number
-		foodPairing: string[]
-		brewersTips: string
-	}
-
-	export type Result = {
-		id: string
-		name: string
-		description: string
-		imageUrl: string
-		category: string
-		abv: number
-		ibu: number
-		ebc: number
-		foodPairing: string[]
-		brewersTips: string
-		createdAt: Date
-		updatedAt: Date
+	constructor(params: CreateBeerCommand) {
+		Object.assign(this, params)
 	}
 }
 
-export class CreateBeerCommandImpl implements CreateBeerCommand {
+export interface CreateBeerHandler {
+	execute(command: CreateBeerCommand): Promise<{ id: string }>
+}
+
+export class CreateBeerHandlerImpl implements CreateBeerHandler {
 	constructor(private readonly beerRepository: CreateBeerRepository) {}
 
-	async execute(params: CreateBeerCommand.Params) {
+	async execute(command: CreateBeerCommand) {
 		const beer = new BeerBuilder()
-			.withName(params.name)
-			.withDescription(params.description)
-			.withImageUrl(params.imageUrl)
-			.withCategory(params.category)
-			.withAbv(params.abv)
-			.withIbu(params.ibu)
-			.withEbc(params.ebc)
-			.withFoodPairing(params.foodPairing)
-			.withBrewersTips(params.brewersTips)
+			.withName(command.name)
+			.withDescription(command.description)
+			.withImageUrl(command.imageUrl)
+			.withCategory(new CategoryBuilder().withName(command.category).build())
+			.withAbv(new Abv(command.abv))
+			.withIbu(new Ibu(command.ibu))
+			.withEbc(new Ebc(command.ebc))
+			.withFoodPairing(command.foodPairing)
+			.withBrewersTips(command.brewersTips)
 			.build()
 
-		return this.beerRepository.execute(beer)
+		const createdBeer = await this.beerRepository.execute(beer)
+		return { id: createdBeer.id }
 	}
 }

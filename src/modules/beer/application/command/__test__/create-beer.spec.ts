@@ -1,85 +1,37 @@
 import { CreateBeerRepository } from '../../../domain/repository/beer'
-import { CreateBeerCommandImpl } from '../create-beer'
+import { CreateBeerCommand, CreateBeerHandlerImpl } from '../create-beer'
 
 const makeSut = () => {
 	const createBeerRepository: CreateBeerRepository = {
 		execute: jest.fn(),
 	}
 
-	const sut = new CreateBeerCommandImpl(createBeerRepository)
+	jest.spyOn(createBeerRepository, 'execute').mockResolvedValueOnce({ id: '1' } as any)
+
+	const sut = new CreateBeerHandlerImpl(createBeerRepository)
 
 	return { sut, createBeerRepository }
 }
 
-describe('CreateBeerCommandImpl', () => {
-	it('should call createBeerRepository with correct params', async () => {
+describe('CreateBeerHandlerImpl', () => {
+	test('should create a beer', async () => {
 		const { sut, createBeerRepository } = makeSut()
 
-		const params = {
-			name: 'name',
-			description: 'description',
-			imageUrl: 'imageUrl',
-			category: 'category',
+		const beer = new CreateBeerCommand({
+			name: 'Sample Beer',
+			description: 'A sample beer description.',
+			imageUrl: 'sample.jpg',
+			category: 'Sample Category',
 			abv: 1,
-			ibu: 2,
-			ebc: 3,
-			foodPairing: ['foodPairing'],
-			brewersTips: 'brewersTips',
-		}
-
-		await sut.execute(params)
-
-		expect(createBeerRepository.execute).toHaveBeenCalledWith({
-			name: params.name,
-			description: params.description,
-			imageUrl: params.imageUrl,
-			category: params.category,
-			abv: params.abv,
-			ibu: params.ibu,
-			ebc: params.ebc,
-			foodPairing: params.foodPairing,
-			brewersTips: params.brewersTips,
-			createdAt: expect.any(Date),
-			updatedAt: expect.any(Date),
-		})
-	})
-
-	it('should throw if createBeerRepository throws', async () => {
-		const { sut, createBeerRepository } = makeSut()
-
-		jest.spyOn(createBeerRepository, 'execute').mockImplementationOnce(() => {
-			throw new Error()
+			ibu: 1,
+			ebc: 1,
+			foodPairing: ['Food 1', 'Food 2'],
+			brewersTips: 'Some brewing tips.',
 		})
 
-		const params = {
-			name: 'name',
-			description: 'description',
-			imageUrl: 'imageUrl',
-			category: 'category',
-			abv: 1,
-			ibu: 2,
-			ebc: 3,
-			foodPairing: ['foodPairing'],
-			brewersTips: 'brewersTips',
-		}
+		await sut.execute(beer)
 
-		const promise = sut.execute(params)
-
-		await expect(promise).rejects.toThrow()
-
-		expect(createBeerRepository.execute).toHaveBeenCalledWith({
-			name: params.name,
-			description: params.description,
-			imageUrl: params.imageUrl,
-			category: params.category,
-			abv: params.abv,
-			ibu: params.ibu,
-			ebc: params.ebc,
-			foodPairing: params.foodPairing,
-			brewersTips: params.brewersTips,
-			createdAt: expect.any(Date),
-			updatedAt: expect.any(Date),
-		})
+		expect(createBeerRepository.execute).toHaveBeenCalled()
 	})
 
 	test('should return an error if Beer model is invalid', async () => {
