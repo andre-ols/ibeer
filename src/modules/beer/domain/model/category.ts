@@ -14,10 +14,10 @@ import { UpdatedAt } from '../value-object/updated-at'
  */
 export class Category {
 	constructor(
-		private id: string,
-		private name: string,
-		private createdAt: CreatedAt,
-		private updatedAt: UpdatedAt,
+		readonly id: string,
+		readonly name: string,
+		readonly createdAt: CreatedAt,
+		readonly updatedAt: UpdatedAt,
 	) {
 		this.validate()
 	}
