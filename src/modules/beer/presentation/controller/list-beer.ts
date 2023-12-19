@@ -1,7 +1,7 @@
 import { badRequest, ok } from '../../../core/api/helpers/http-response'
 import { HttpResponse } from '../../../core/protocols/http'
 import { Pagination } from '../../../core/querying/pagination'
-import { ListBeerQuery } from '../../application/query/list-beer'
+import { ListBeerHandler } from '../../application/query/list-beer'
 
 export interface ListBeerController {
 	execute(request: ListBeerController.Request): Promise<ListBeerController.Result>
@@ -28,7 +28,12 @@ export namespace ListBeerController {
 			abv: number
 			ibu: number
 			ebc: number
-			category: string
+			category: {
+				id: string
+				name: string
+				createdAt: Date
+				updatedAt: Date
+			}
 			foodPairing: string[]
 			brewersTips: string
 			createdAt: Date
@@ -38,7 +43,7 @@ export namespace ListBeerController {
 }
 
 export class ListBeerControllerImpl implements ListBeerController {
-	constructor(private readonly listBeerQuery: ListBeerQuery) {}
+	constructor(private readonly listBeerHandler: ListBeerHandler) {}
 
 	async execute(request: ListBeerController.Request): Promise<ListBeerController.Result> {
 		const { query } = request
@@ -54,13 +59,16 @@ export class ListBeerControllerImpl implements ListBeerController {
 			return badRequest(error.message)
 		}
 
-		const options: ListBeerQuery.Options = { pagination, filters: params }
+		const result = await this.listBeerHandler.execute({
+			limit: pagination.getLimit(),
+			page: pagination.getPage(),
+			abv: params.abv,
+			ebc: params.ebc,
+			ibu: params.ibu,
+			name: params.name,
+		})
 
-		const result = await this.listBeerQuery.execute(options)
-
-		const jsonBeers = result.beers.map((beer) => beer.toJSON())
-
-		return ok(jsonBeers, {
+		return ok(result.beers, {
 			page: pagination.getPage(),
 			limit: pagination.getLimit(),
 			totalCount: result.total,

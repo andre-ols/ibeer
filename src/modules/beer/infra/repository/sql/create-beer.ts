@@ -1,15 +1,10 @@
 import { prismaClient } from '../../../../../db/prisma-client'
-import { Beer, BeerBuilder } from '../../../domain/model/beer'
+import { Beer } from '../../../domain/model/beer'
 import { CreateBeerRepository } from '../../../domain/repository/beer'
-import { Abv } from '../../../domain/value-object/abv'
-import { CreatedAt } from '../../../domain/value-object/created-at'
-import { Ebc } from '../../../domain/value-object/ebc'
-import { Ibu } from '../../../domain/value-object/ibu'
-import { UpdatedAt } from '../../../domain/value-object/updated-at'
 
 export class CreateBeerSqlRepository implements CreateBeerRepository {
-	async execute(beer: Beer): Promise<Beer> {
-		const createdBeer = await prismaClient.$transaction(async (tx) => {
+	async execute(beer: Beer): Promise<void> {
+		await prismaClient.$transaction(async (tx) => {
 			// create a beer and create or update a category
 
 			await tx.category.upsert({
@@ -47,20 +42,5 @@ export class CreateBeerSqlRepository implements CreateBeerRepository {
 
 			return dataBeer
 		})
-
-		return new BeerBuilder()
-			.withId(createdBeer.id)
-			.withName(createdBeer.name)
-			.withDescription(createdBeer.description)
-			.withImageUrl(createdBeer.imageUrl)
-			.withAbv(new Abv(Number(createdBeer.abv)))
-			.withIbu(new Ibu(createdBeer.ibu))
-			.withEbc(new Ebc(createdBeer.ebc))
-			.withBrewersTips(createdBeer.brewersTips)
-			.withCreatedAt(new CreatedAt(createdBeer.createdAt))
-			.withUpdatedAt(new UpdatedAt(createdBeer.updatedAt))
-			.withFoodPairing(createdBeer.foodPairing)
-			.withCategory(beer.category)
-			.build()
 	}
 }

@@ -1,6 +1,6 @@
 import { ok } from '../../../core/api/helpers/http-response'
 import { HttpResponse } from '../../../core/protocols/http'
-import { FindBeerQuery } from '../../application/query/find-beer'
+import { FindBeerHandler } from '../../application/query/find-beer'
 
 export interface FindBeerController {
 	execute(request: FindBeerController.Request): Promise<FindBeerController.Result>
@@ -21,7 +21,12 @@ export namespace FindBeerController {
 		abv: number
 		ibu: number
 		ebc: number
-		category: string
+		category: {
+			id: string
+			name: string
+			createdAt: Date
+			updatedAt: Date
+		}
 		foodPairing: string[]
 		brewersTips: string
 		createdAt: Date
@@ -30,14 +35,14 @@ export namespace FindBeerController {
 }
 
 export class FindBeerControllerImpl implements FindBeerController {
-	constructor(private readonly findBeerQuery: FindBeerQuery) {}
+	constructor(private readonly findBeerHandler: FindBeerHandler) {}
 
 	async execute(request: FindBeerController.Request): Promise<FindBeerController.Result> {
 		const id = request.params.id
 
-		const options: FindBeerQuery.Params = { id }
-
-		const beer = await this.findBeerQuery.execute(options)
+		const beer = await this.findBeerHandler.execute({
+			id,
+		})
 
 		return ok(beer)
 	}

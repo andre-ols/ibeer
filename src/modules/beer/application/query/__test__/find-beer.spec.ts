@@ -1,11 +1,11 @@
-import { FindBeerQueryImpl } from '../find-beer'
+import { FindBeerHandlerImpl } from '../find-beer'
 
 const makeSut = () => {
 	const findBeerRepository = {
 		execute: jest.fn(),
 	}
 
-	const sut = new FindBeerQueryImpl(findBeerRepository)
+	const sut = new FindBeerHandlerImpl(findBeerRepository)
 
 	return {
 		sut,
@@ -13,16 +13,20 @@ const makeSut = () => {
 	}
 }
 
-describe('FindBeerQueryImpl', () => {
+describe('FindBeerHandlerImpl', () => {
 	test('should call findBeerRepository.execute with the correct parameters', async () => {
 		const { sut, findBeerRepository } = makeSut()
 
-		const params = {
-			id: 1,
+		const findBeerQuery = {
+			id: '1',
 		}
 
-		await sut.execute(params)
+		jest.spyOn(findBeerRepository, 'execute').mockResolvedValueOnce({
+			toJSON: () => ({}),
+		})
 
-		expect(findBeerRepository.execute).toHaveBeenCalledWith(params)
+		await sut.execute(findBeerQuery)
+
+		expect(findBeerRepository.execute).toHaveBeenCalledWith(findBeerQuery)
 	})
 })

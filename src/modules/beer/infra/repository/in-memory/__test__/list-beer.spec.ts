@@ -1,3 +1,4 @@
+import { Beer } from '@/modules/beer/domain/model/beer'
 import { Pagination } from '../../../../../core/querying/pagination'
 import { ListBeerRepository } from '../../../../domain/repository/beer'
 import { DataBeer } from '../beers'
@@ -33,7 +34,12 @@ describe('ListBeerInMemoryRepository', () => {
 			abv: 5.0,
 			ibu: 20,
 			ebc: 10,
-			category: 'Sample Category',
+			category: {
+				id: 'category-id',
+				name: 'Sample Category',
+				createdAt: new Date('2023-01-01'),
+				updatedAt: new Date('2023-01-01'),
+			},
 			foodPairing: ['Food 1', 'Food 2'],
 			brewersTips: 'Some brewing tips.',
 			createdAt: new Date('2023-01-01'),
@@ -44,25 +50,8 @@ describe('ListBeerInMemoryRepository', () => {
 		const result = await sut.execute(options)
 
 		// assert
-		expect(result).toEqual({
-			beers: [
-				{
-					id: 'id-1',
-					name: 'Sample Beer',
-					description: 'A sample beer description.',
-					imageUrl: 'sample.jpg',
-					abv: 5.0,
-					ibu: 20,
-					ebc: 10,
-					category: 'Sample Category',
-					foodPairing: ['Food 1', 'Food 2'],
-					brewersTips: 'Some brewing tips.',
-					createdAt: new Date('2023-01-01'),
-					updatedAt: new Date('2023-01-01'),
-				},
-			],
-			total: 1,
-		})
+		expect(result.beers[0] instanceof Beer).toBe(true)
+		expect(result.total).toBe(1)
 	})
 
 	describe('when filtering by abv', () => {
@@ -77,7 +66,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -92,7 +86,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -103,25 +102,8 @@ describe('ListBeerInMemoryRepository', () => {
 
 			const result = await sut.execute(options)
 
-			expect(result).toEqual({
-				beers: [
-					{
-						id: 'id-1',
-						name: 'Sample Beer',
-						description: 'A sample beer description.',
-						imageUrl: 'sample.jpg',
-						abv: 5.0,
-						ibu: 20,
-						ebc: 10,
-						category: 'Sample Category',
-						foodPairing: ['Food 1', 'Food 2'],
-						brewersTips: 'Some brewing tips.',
-						createdAt: new Date('2023-01-01'),
-						updatedAt: new Date('2023-01-01'),
-					},
-				],
-				total: 1,
-			})
+			expect(result.total).toBe(1)
+			expect(result.beers[0].abv.getValue()).toBe(5.0)
 		})
 
 		test('should return an empty list if no beer matches the abv', async () => {
@@ -135,7 +117,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -150,7 +137,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -180,7 +172,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -195,7 +192,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -206,25 +208,8 @@ describe('ListBeerInMemoryRepository', () => {
 
 			const result = await sut.execute(options)
 
-			expect(result).toEqual({
-				beers: [
-					{
-						id: 'id-1',
-						name: 'Sample Beer',
-						description: 'A sample beer description.',
-						imageUrl: 'sample.jpg',
-						abv: 5.0,
-						ibu: 20,
-						ebc: 10,
-						category: 'Sample Category',
-						foodPairing: ['Food 1', 'Food 2'],
-						brewersTips: 'Some brewing tips.',
-						createdAt: new Date('2023-01-01'),
-						updatedAt: new Date('2023-01-01'),
-					},
-				],
-				total: 1,
-			})
+			expect(result.total).toBe(1)
+			expect(result.beers[0].ibu.getValue()).toBe(20)
 		})
 
 		test('should return an empty list if no beer matches the ibu', async () => {
@@ -238,7 +223,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -253,7 +243,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -283,7 +278,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -298,7 +298,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 20,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -309,25 +314,8 @@ describe('ListBeerInMemoryRepository', () => {
 
 			const result = await sut.execute(options)
 
-			expect(result).toEqual({
-				beers: [
-					{
-						id: 'id-1',
-						name: 'Sample Beer',
-						description: 'A sample beer description.',
-						imageUrl: 'sample.jpg',
-						abv: 5.0,
-						ibu: 20,
-						ebc: 10,
-						category: 'Sample Category',
-						foodPairing: ['Food 1', 'Food 2'],
-						brewersTips: 'Some brewing tips.',
-						createdAt: new Date('2023-01-01'),
-						updatedAt: new Date('2023-01-01'),
-					},
-				],
-				total: 1,
-			})
+			expect(result.total).toBe(1)
+			expect(result.beers[0].ebc.getValue()).toBe(10)
 		})
 
 		test('should return an empty list if no beer matches the ebc', async () => {
@@ -341,7 +329,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -356,7 +349,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 20,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -386,7 +384,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -401,7 +404,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 20,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -412,25 +420,8 @@ describe('ListBeerInMemoryRepository', () => {
 
 			const result = await sut.execute(options)
 
-			expect(result).toEqual({
-				beers: [
-					{
-						id: 'id-1',
-						name: 'Sample Beer',
-						description: 'A sample beer description.',
-						imageUrl: 'sample.jpg',
-						abv: 5.0,
-						ibu: 20,
-						ebc: 10,
-						category: 'Sample Category',
-						foodPairing: ['Food 1', 'Food 2'],
-						brewersTips: 'Some brewing tips.',
-						createdAt: new Date('2023-01-01'),
-						updatedAt: new Date('2023-01-01'),
-					},
-				],
-				total: 1,
-			})
+			expect(result.total).toBe(1)
+			expect(result.beers[0].name).toBe('Sample Beer')
 		})
 
 		test('should return an empty list if no beer matches the name', async () => {
@@ -444,7 +435,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 5.0,
 				ibu: 20,
 				ebc: 10,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),
@@ -459,7 +455,12 @@ describe('ListBeerInMemoryRepository', () => {
 				abv: 10.0,
 				ibu: 30,
 				ebc: 20,
-				category: 'Sample Category',
+				category: {
+					id: 'category-id',
+					name: 'Sample Category',
+					createdAt: new Date('2023-01-01'),
+					updatedAt: new Date('2023-01-01'),
+				},
 				foodPairing: ['Food 1', 'Food 2'],
 				brewersTips: 'Some brewing tips.',
 				createdAt: new Date('2023-01-01'),

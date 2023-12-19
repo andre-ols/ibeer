@@ -22,7 +22,7 @@ export class CreateBeerCommand {
 }
 
 export interface CreateBeerHandler {
-	execute(command: CreateBeerCommand): Promise<{ id: string }>
+	execute(command: CreateBeerCommand): Promise<void>
 }
 
 export class CreateBeerHandlerImpl implements CreateBeerHandler {
@@ -41,7 +41,6 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 			.withBrewersTips(command.brewersTips)
 			.build()
 
-		const createdBeer = await this.beerRepository.execute(beer)
-		return { id: createdBeer.id }
+		await this.beerRepository.execute(beer)
 	}
 }

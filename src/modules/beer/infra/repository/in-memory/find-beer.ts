@@ -1,3 +1,9 @@
+import { CategoryBuilder } from '@/modules/beer/domain/model/category'
+import { Abv } from '@/modules/beer/domain/value-object/abv'
+import { CreatedAt } from '@/modules/beer/domain/value-object/created-at'
+import { Ebc } from '@/modules/beer/domain/value-object/ebc'
+import { Ibu } from '@/modules/beer/domain/value-object/ibu'
+import { UpdatedAt } from '@/modules/beer/domain/value-object/updated-at'
 import { NotFoundError } from '../../../../core/errors/not-found'
 import { BeerBuilder } from '../../../domain/model/beer'
 import { FindBeerRepository } from '../../../domain/repository/beer'
@@ -20,14 +26,21 @@ export class FindBeerInMemoryRepository implements FindBeerRepository {
 					.withName(beer.name)
 					.withDescription(beer.description)
 					.withImageUrl(beer.imageUrl)
-					.withAbv(beer.abv)
-					.withIbu(beer.ibu)
-					.withEbc(beer.ebc)
-					.withCategory(beer.category)
+					.withAbv(new Abv(beer.abv))
+					.withIbu(new Ibu(beer.ibu))
+					.withEbc(new Ebc(beer.ebc))
+					.withCategory(
+						new CategoryBuilder()
+							.withId(beer.category.id)
+							.withName(beer.category.name)
+							.withCreatedAt(new CreatedAt(beer.category.createdAt))
+							.withUpdatedAt(new UpdatedAt(beer.category.updatedAt))
+							.build(),
+					)
 					.withFoodPairing(beer.foodPairing)
 					.withBrewersTips(beer.brewersTips)
-					.withCreatedAt(beer.createdAt)
-					.withUpdatedAt(beer.updatedAt)
+					.withCreatedAt(new CreatedAt(beer.createdAt))
+					.withUpdatedAt(new UpdatedAt(beer.updatedAt))
 					.build(),
 			)
 		})

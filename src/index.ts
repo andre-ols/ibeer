@@ -1,7 +1,7 @@
 import express, { Request } from 'express'
-import { FindBeerQueryImpl } from './modules/beer/application/query/find-beer'
-import { ListBeerQueryImpl } from './modules/beer/application/query/list-beer'
-import { beers } from './modules/beer/infra/repository/in-memory/beers'
+import { FindBeerHandlerImpl } from './modules/beer/application/query/find-beer'
+import { ListBeerHandlerImpl } from './modules/beer/application/query/list-beer'
+import { dataBeer } from './modules/beer/infra/repository/in-memory/beers'
 import { FindBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/find-beer'
 import { ListBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/list-beer'
 import { FindBeerControllerImpl } from './modules/beer/presentation/controller/find-beer'
@@ -13,7 +13,7 @@ app.get('/beer', (req: Request, res) => {
 	const { query } = req
 
 	const controller = new ListBeerControllerImpl(
-		new ListBeerQueryImpl(new ListBeerInMemoryRepository(beers)),
+		new ListBeerHandlerImpl(new ListBeerInMemoryRepository(dataBeer)),
 	)
 
 	controller
@@ -44,7 +44,7 @@ app.get('/beer/:id', (req: Request, res) => {
 	const { id } = req.params
 
 	const controller = new FindBeerControllerImpl(
-		new FindBeerQueryImpl(new FindBeerInMemoryRepository(beers)),
+		new FindBeerHandlerImpl(new FindBeerInMemoryRepository(dataBeer)),
 	)
 
 	controller

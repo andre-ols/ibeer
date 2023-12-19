@@ -37,7 +37,8 @@
     "lint": "eslint . --ext .ts --ext .mts",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "prettier": "prettier --config .prettierrc --write ."
+    "prettier": "prettier --config .prettierrc --write .",
+    "type-check": "tsc --noEmit"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts -r tsconfig-paths/register"

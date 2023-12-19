@@ -1,7 +1,7 @@
 import 'module-alias/register'
 
+import { beers } from '@/data/beers'
 import { CreateBeerHandlerImpl } from '@/modules/beer/application/command/create-beer'
-import { beers } from '@/modules/beer/infra/repository/in-memory/beers'
 import { CreateBeerSqlRepository } from '@/modules/beer/infra/repository/sql/create-beer'
 
 async function main() {
