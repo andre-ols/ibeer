@@ -1,4 +1,5 @@
-import { FindBeerRepository } from '../../domain/repository/beer'
+import { NotFoundError } from '@/modules/core/errors/not-found'
+import { PrismaClient } from '@prisma/client'
 
 export class FindBeerQuery {
 	id: string
@@ -29,11 +30,22 @@ export interface FindBeerHandler {
 	}>
 }
 export class FindBeerHandlerImpl implements FindBeerHandler {
-	constructor(private readonly beerRepository: FindBeerRepository) {}
+	constructor(private readonly prismaClient: PrismaClient) {}
 
 	async execute(query: FindBeerQuery) {
-		const beer = await this.beerRepository.execute(query)
+		const beer = await this.prismaClient.beer.findUnique({
+			where: {
+				id: query.id,
+			},
+			include: {
+				category: true,
+			},
+		})
 
-		return beer.toJSON()
+		if (!beer) {
+			throw new NotFoundError('Beer')
+		}
+
+		return beer
 	}
 }

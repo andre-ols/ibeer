@@ -23,7 +23,7 @@ model beer {
   name        String
   description String
   imageUrl    String
-  abv         Decimal
+  abv         Int
   ibu         Int
   ebc         Int
   foodPairing String[]

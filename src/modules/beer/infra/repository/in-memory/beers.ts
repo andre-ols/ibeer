@@ -25,6 +25,8 @@ export const dataBeer: Array<DataBeer> = beers
 	.map((beer) => ({
 		...beer,
 		id: randomUUID(),
+		createdAt: new Date(),
+		updatedAt: new Date(),
 	}))
 	.map((beer) => ({
 		...beer,

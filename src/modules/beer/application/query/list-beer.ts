@@ -1,5 +1,5 @@
+import { PrismaClient } from '@prisma/client'
 import { Pagination } from '../../../core/querying/pagination'
-import { ListBeerRepository } from '../../domain/repository/beer'
 
 export class ListBeerQuery {
 	page: number
@@ -39,24 +39,43 @@ export interface ListBeerHandler {
 }
 
 export class ListBeerHandlerImpl implements ListBeerHandler {
-	constructor(private readonly beerRepository: ListBeerRepository) {}
+	constructor(private readonly prismaClient: PrismaClient) {}
 
 	async execute(query: ListBeerQuery) {
 		const pagination = new Pagination()
 		pagination.setPage(query.page)
 		pagination.setLimit(query.limit)
-		const { beers, total } = await this.beerRepository.execute({
-			filters: {
+
+		// find and count in one query
+		const total = await this.prismaClient.beer.count({
+			where: {
+				name: {
+					contains: query.name,
+				},
 				abv: query.abv,
 				ibu: query.ibu,
 				ebc: query.ebc,
-				name: query.name,
 			},
-			pagination: pagination,
+		})
+
+		const beers = await this.prismaClient.beer.findMany({
+			skip: pagination.getOffset(),
+			take: pagination.getLimit(),
+			where: {
+				name: {
+					contains: query.name,
+				},
+				abv: query.abv,
+				ibu: query.ibu,
+				ebc: query.ebc,
+			},
+			include: {
+				category: true,
+			},
 		})
 
 		return {
-			beers: beers.map((beer) => beer.toJSON()),
+			beers,
 			total,
 		}
 	}

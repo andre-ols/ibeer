@@ -1,9 +1,7 @@
 import express, { Request } from 'express'
+import { prismaClient } from './db/prisma-client'
 import { FindBeerHandlerImpl } from './modules/beer/application/query/find-beer'
 import { ListBeerHandlerImpl } from './modules/beer/application/query/list-beer'
-import { dataBeer } from './modules/beer/infra/repository/in-memory/beers'
-import { FindBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/find-beer'
-import { ListBeerInMemoryRepository } from './modules/beer/infra/repository/in-memory/list-beer'
 import { FindBeerControllerImpl } from './modules/beer/presentation/controller/find-beer'
 import { ListBeerControllerImpl } from './modules/beer/presentation/controller/list-beer'
 
@@ -12,9 +10,7 @@ const app = express()
 app.get('/beer', (req: Request, res) => {
 	const { query } = req
 
-	const controller = new ListBeerControllerImpl(
-		new ListBeerHandlerImpl(new ListBeerInMemoryRepository(dataBeer)),
-	)
+	const controller = new ListBeerControllerImpl(new ListBeerHandlerImpl(prismaClient))
 
 	controller
 		.execute({
@@ -43,9 +39,7 @@ app.get('/beer', (req: Request, res) => {
 app.get('/beer/:id', (req: Request, res) => {
 	const { id } = req.params
 
-	const controller = new FindBeerControllerImpl(
-		new FindBeerHandlerImpl(new FindBeerInMemoryRepository(dataBeer)),
-	)
+	const controller = new FindBeerControllerImpl(new FindBeerHandlerImpl(prismaClient))
 
 	controller
 		.execute({

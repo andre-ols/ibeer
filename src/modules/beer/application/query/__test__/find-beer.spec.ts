@@ -1,32 +1,52 @@
 import { FindBeerHandlerImpl } from '../find-beer'
 
 const makeSut = () => {
-	const findBeerRepository = {
-		execute: jest.fn(),
+	const prismaClient = {
+		beer: {
+			findUnique: jest.fn(),
+		},
 	}
 
-	const sut = new FindBeerHandlerImpl(findBeerRepository)
+	const sut = new FindBeerHandlerImpl(prismaClient as any)
 
 	return {
 		sut,
-		findBeerRepository,
+		prismaClient,
 	}
 }
 
 describe('FindBeerHandlerImpl', () => {
 	test('should call findBeerRepository.execute with the correct parameters', async () => {
-		const { sut, findBeerRepository } = makeSut()
+		const { sut, prismaClient } = makeSut()
 
 		const findBeerQuery = {
 			id: '1',
 		}
 
-		jest.spyOn(findBeerRepository, 'execute').mockResolvedValueOnce({
-			toJSON: () => ({}),
+		jest.spyOn(prismaClient.beer, 'findUnique').mockResolvedValueOnce({
+			id: 1,
+			name: 'Sample Beer',
+			description: 'A sample beer description.',
+			imageUrl: 'sample.jpg',
+			abv: 5.0,
+			ibu: 20,
+			ebc: 10,
+			category: 'Sample Category',
+			foodPairing: ['Food 1', 'Food 2'],
+			brewersTips: 'Some brewing tips.',
+			createdAt: new Date('2023-01-01'),
+			updatedAt: new Date('2023-01-01'),
 		})
 
 		await sut.execute(findBeerQuery)
 
-		expect(findBeerRepository.execute).toHaveBeenCalledWith(findBeerQuery)
+		expect(prismaClient.beer.findUnique).toHaveBeenCalledWith({
+			where: {
+				id: findBeerQuery.id,
+			},
+			include: {
+				category: true,
+			},
+		})
 	})
 })

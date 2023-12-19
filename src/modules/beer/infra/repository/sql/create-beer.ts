@@ -1,10 +1,12 @@
-import { prismaClient } from '../../../../../db/prisma-client'
+import { PrismaClient } from '@prisma/client'
 import { Beer } from '../../../domain/model/beer'
 import { CreateBeerRepository } from '../../../domain/repository/beer'
 
 export class CreateBeerSqlRepository implements CreateBeerRepository {
+	constructor(private readonly prismaClient: PrismaClient) {}
+
 	async execute(beer: Beer): Promise<void> {
-		await prismaClient.$transaction(async (tx) => {
+		await this.prismaClient.$transaction(async (tx) => {
 			// create a beer and create or update a category
 
 			await tx.category.upsert({

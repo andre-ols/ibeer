@@ -11,8 +11,6 @@ export const beers = [
 		foodPairing: ['Asas de frango defumadas', 'Ramen de miso', 'Cheesecake de yuzu.'],
 		brewersTips:
 			'A adição do fruto cítrico japonês Yuzu durante a fermentação realça a natureza ácida desta Berliner Weisse. A fermentação com uma levedura de lager em temperaturas ale cria uma fusão única de crocância e frutuosidade.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'IPA Tropical Burst',
@@ -26,8 +24,6 @@ export const beers = [
 		foodPairing: ['Tacos de camarão', 'Frango grelhado com abacaxi', 'Sorvete de manga.'],
 		brewersTips:
 			'A intensa lupulagem a seco com lúpulos tropicais durante a maturação confere a esta IPA um perfil aromático exuberante, destacando notas de frutas tropicais como manga, maracujá e abacaxi.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Stout Café Imperial',
@@ -41,8 +37,6 @@ export const beers = [
 		foodPairing: ['Churrasco', 'Brownie de chocolate amargo', 'Queijo azul.'],
 		brewersTips:
 			'A infusão de café imperial durante a maturação proporciona uma experiência robusta, destacando a torrefação do malte e os aromas intensos de café, enquanto a levedura contribui para um final seco.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Saison de Pêssego da Província',
@@ -56,8 +50,6 @@ export const beers = [
 		foodPairing: ['Salada de folhas verdes', 'Frutos do mar grelhados', 'Tarte de pêssego.'],
 		brewersTips:
 			'O uso de leveduras saison durante a fermentação cria uma cerveja refrescante com notas frutadas, e a adição de pêssegos da Provence oferece uma doçura suculenta que complementa as características da levedura.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Golden Honey Ale',
@@ -71,8 +63,6 @@ export const beers = [
 		foodPairing: ['Queijo brie', 'Frango assado', 'Sorvete de baunilha.'],
 		brewersTips:
 			'A adição de mel cru no final da fervura preserva os aromas naturais e contribui para uma Ale dourada equilibrada, onde a doçura floral do mel se mistura harmoniosamente com a base maltada.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Gose de Melancia Refrescante',
@@ -86,8 +76,6 @@ export const beers = [
 		foodPairing: ['Salada de melancia', 'Ceviche de camarão', 'Sobremesa de limão.'],
 		brewersTips:
 			'A adição de melancia durante a fermentação e um toque de sal marinho na fervura criam uma Gose refrescante e equilibrada, oferecendo uma interação única entre o salgado e o doce.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Tripel Belga Dourada',
@@ -101,8 +89,6 @@ export const beers = [
 		foodPairing: ['Mexilhões ao vapor', 'Queijo gouda envelhecido', 'Torta de maçã.'],
 		brewersTips:
 			'O uso de uma cepa de levedura belga durante a fermentação confere notas frutadas e condimentadas a esta Tripel. O alto teor alcoólico é equilibrado pela complexidade maltada e pela secura no final.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 
 	{
@@ -117,8 +103,6 @@ export const beers = [
 		foodPairing: ['Costelas de porco grelhadas', 'Chili com carne', 'Bolo de caramelo.'],
 		brewersTips:
 			'A adição de maltes caramelizados durante a brassagem intensifica os sabores de caramelo, criando uma Amber Ale rica e equilibrada, onde os maltes e lúpulos se complementam.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Session IPA Citrus Splash',
@@ -132,8 +116,6 @@ export const beers = [
 		foodPairing: ['Tacos de peixe', 'Salada de frutas', 'Sorvete de limão.'],
 		brewersTips:
 			'O uso de lúpulos de aroma cítrico e o dry hopping generoso conferem a esta Session IPA um perfil refrescante e cítrico, mantendo um baixo teor alcoólico.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Rye Pale Ale Picante',
@@ -147,8 +129,6 @@ export const beers = [
 		foodPairing: ['Hambúrguer de carne de porco', 'Queijo pepper jack', 'Torta de maçã.'],
 		brewersTips:
 			'A adição de centeio maltado proporciona à Pale Ale um toque picante e terroso, enquanto a combinação de lúpulos cítricos e picantes contribui para um perfil de sabor complexo.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 
 	{
@@ -163,8 +143,6 @@ export const beers = [
 		foodPairing: ['Brownie de chocolate', 'Queijo azul envelhecido', 'Churrasco defumado.'],
 		brewersTips:
 			'A adição de cacau em pó e nibs de cacau durante a fervura cria uma Porter intensamente chocolate. A levedura utilizada acentua as notas de chocolate, resultando em uma experiência decadente.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Hoppy Wheat Beer',
@@ -178,8 +156,6 @@ export const beers = [
 		foodPairing: ['Salada de camarão', 'Tacos de peixe', 'Cheesecake de limão.'],
 		brewersTips:
 			'O uso de trigo maltado proporciona uma base suave e cremosa, enquanto os lúpulos de aroma cítrico e o dry hopping contribuem para uma explosão de aromas lupulados nesta cerveja de trigo lupulado.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Barleywine Envelhecida em Barril de Carvalho',
@@ -193,8 +169,6 @@ export const beers = [
 		foodPairing: ['Queijo gorgonzola', 'Filé mignon grelhado', 'Torta de nozes.'],
 		brewersTips:
 			'A maturação prolongada em barris de carvalho confere a esta Barleywine notas de baunilha e carvalho, adicionando complexidade aos sabores maltados e ao alto teor alcoólico.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 
 	{
@@ -209,8 +183,6 @@ export const beers = [
 		foodPairing: ['Costeletas de cordeiro', 'Queijo brie', 'Sorvete de cereja.'],
 		brewersTips:
 			'A adição de purê de cereja durante a fermentação secundária intensifica as características frutadas desta Dubbel belga, equilibrando-se com os ésteres da levedura.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Porter Defumada com Chipotle',
@@ -224,8 +196,6 @@ export const beers = [
 		foodPairing: ['Churrasco de porco', 'Queijo defumado', 'Brownie de pimenta.'],
 		brewersTips:
 			'A combinação de maltes defumados e a adição de pimenta chipotle seca durante a fervura criam uma Porter defumada com um toque picante, proporcionando uma experiência única e ousada.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Fruit Punch Gose',
@@ -239,8 +209,6 @@ export const beers = [
 		foodPairing: ['Ceviche de manga', 'Salada de frutas', 'Tarte de maracujá.'],
 		brewersTips:
 			'A adição de purês de frutas tropicais durante a fermentação resulta em uma mistura exótica, simulando um soco de frutas refrescante. A presença do sal marinho contribui para um perfil equilibrado.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Blonde Ale com Lavanda',
@@ -254,8 +222,6 @@ export const beers = [
 		foodPairing: ['Salada de frango grelhado', 'Queijo de cabra', 'Sorvete de lavanda.'],
 		brewersTips:
 			'A infusão de flores de lavanda secas durante a fervura cria uma Blonde Ale leve e floral. A leveza dos maltes é complementada pela delicadeza da lavanda.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 
 	{
@@ -270,8 +236,6 @@ export const beers = [
 		foodPairing: ['Tacos de carne assada', 'Queijo cheddar envelhecido', 'Brownie de nozes.'],
 		brewersTips:
 			'A combinação de maltes de centeio e lúpulos cítricos confere a esta IPA vermelha um perfil maltado e picante, destacando-se entre as IPAs tradicionais.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Weizenbock de Banana e Canela',
@@ -285,8 +249,6 @@ export const beers = [
 		foodPairing: ['Schnitzel de porco', 'Queijo suíço', 'Bolo de banana.'],
 		brewersTips:
 			'A utilização de uma cepa de levedura de trigo desenvolve intensos ésteres de banana, enquanto a adição de canela durante a fermentação proporciona um toque de especiaria a esta Weizenbock robusta.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 	{
 		name: 'Sour Ale de Morango e Manjericão',
@@ -300,7 +262,5 @@ export const beers = [
 		foodPairing: ['Salada de morango', 'Ceviche de camarão', 'Sorvete de limão'],
 		brewersTips:
 			'A adição de morangos frescos e manjericão durante a fermentação secundária cria uma Sour Ale refrescante e ácida, onde a combinação de frutas e ervas resulta em um perfil único e equilibrado.',
-		createdAt: new Date(),
-		updatedAt: new Date(),
 	},
 ]
