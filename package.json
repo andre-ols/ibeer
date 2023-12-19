@@ -39,12 +39,19 @@
     "test:watch": "jest --watch",
     "prettier": "prettier --config .prettierrc --write ."
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts -r tsconfig-paths/register"
+  },
   "author": "André Oliveira Silva",
   "license": "Apache-2.0",
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "express": "^4.18.2",
+    "module-alias": "^2.2.3",
     "prisma": "^5.7.1"
+  },
+  "_moduleAliases": {
+    "@": "src"
   },
   "volta": {
     "node": "20.0.0"

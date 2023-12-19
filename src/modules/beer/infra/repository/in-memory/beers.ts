@@ -342,5 +342,5 @@ export const beers: Array<DataBeer> = [
 	},
 ].map((beer) => ({
 	...beer,
-	imageUrl: `/assets/${beer.name}/fg-image.png`,
+	imageUrl: `http://localhost:3333/assets/${beer.name}/fg-image.png`,
 }))

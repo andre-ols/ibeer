@@ -6,6 +6,7 @@ const makeSut = () => {
 		execute: jest.fn(),
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	jest.spyOn(createBeerRepository, 'execute').mockResolvedValueOnce({ id: '1' } as any)
 
 	const sut = new CreateBeerHandlerImpl(createBeerRepository)

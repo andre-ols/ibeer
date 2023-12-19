@@ -11,17 +11,15 @@ datasource db {
 }
 
 model category {
-  id         String   @unique
-  categoryId Int      @id @unique @default(autoincrement())
-  name       String
-  createdAt  DateTime
-  updatedAt  DateTime
-  beer       beer[]
+  id        String   @id @unique
+  name      String
+  createdAt DateTime
+  updatedAt DateTime
+  beer      beer[]
 }
 
 model beer {
   id          String   @id @unique
-  beerId      Int      @unique @default(autoincrement())
   name        String
   description String
   imageUrl    String
@@ -30,8 +28,8 @@ model beer {
   ebc         Int
   foodPairing String[]
   brewersTips String
-  category    category @relation(fields: [categoryId], references: [categoryId])
-  categoryId  Int
+  category    category @relation(fields: [categoryId], references: [id])
+  categoryId  String
   createdAt   DateTime
   updatedAt   DateTime
 }

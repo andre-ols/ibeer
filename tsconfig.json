@@ -7,7 +7,7 @@
     ],
     "moduleResolution": "node16",
     "rootDir": ".",
-    "outDir": "build",
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "alwaysStrict": true,
@@ -21,9 +21,16 @@
     "noImplicitThis": false,
     "strictNullChecks": true,
     "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
   },
   "include": [
     "src/**/*",
-    "__tests__/**/*"
+    "__tests__/**/*",
+    "prisma/seed.ts"
   ]
 }
