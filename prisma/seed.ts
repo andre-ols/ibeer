@@ -59,6 +59,7 @@ async function saveBeer() {
 		await createBeerHandler.execute({
 			name: beer.name,
 			description: beer.description,
+			price: beer.price,
 			imageUrl: beer.imageUrl,
 			abv: beer.abv,
 			ibu: beer.ibu,

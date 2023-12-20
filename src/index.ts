@@ -1,3 +1,5 @@
+import 'module-alias/register'
+
 import express, { Request } from 'express'
 import { prismaClient } from './db/prisma-client'
 import { FindBeerHandlerImpl } from './modules/beer/application/query/find-beer'

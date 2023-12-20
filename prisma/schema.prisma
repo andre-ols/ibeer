@@ -22,6 +22,7 @@ model beer {
   id          String   @id @unique
   name        String
   description String
+  price       Float
   imageUrl    String
   abv         Int
   ibu         Int

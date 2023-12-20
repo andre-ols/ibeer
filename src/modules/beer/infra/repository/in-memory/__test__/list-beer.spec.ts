@@ -30,6 +30,8 @@ describe('ListBeerInMemoryRepository', () => {
 			id: 'id-1',
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
+			price: 10.0,
+
 			imageUrl: 'sample.jpg',
 			abv: 5.0,
 			ibu: 20,
@@ -62,6 +64,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -82,6 +86,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 20,
@@ -113,6 +119,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -133,6 +141,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 20,
@@ -168,6 +178,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -188,6 +200,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,
@@ -219,6 +233,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -239,6 +255,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,
@@ -274,6 +292,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -294,6 +314,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,
@@ -325,6 +347,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -345,6 +369,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,
@@ -380,6 +406,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -400,6 +428,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample 2',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,
@@ -431,6 +461,8 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-1',
 				name: 'Sample Beer',
 				description: 'A sample beer description.',
+				price: 10.0,
+
 				imageUrl: 'sample.jpg',
 				abv: 5.0,
 				ibu: 20,
@@ -451,6 +483,7 @@ describe('ListBeerInMemoryRepository', () => {
 				id: 'id-2',
 				name: 'Sample Beer 2',
 				description: 'A sample beer description.',
+				price: 10.0,
 				imageUrl: 'sample.jpg',
 				abv: 10.0,
 				ibu: 30,

@@ -12,6 +12,7 @@ import { FindCategoryHandler } from '../query/find-category'
 export class CreateBeerCommand {
 	name: string
 	description: string
+	price: number
 	imageUrl: string
 	categoryId: string
 	abv: number
@@ -47,6 +48,7 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 		const beer = new BeerBuilder()
 			.withName(command.name)
 			.withDescription(command.description)
+			.withPrice(command.price)
 			.withImageUrl(command.imageUrl)
 			.withCategory(
 				new CategoryBuilder()

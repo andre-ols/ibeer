@@ -19,6 +19,8 @@ describe('FindBeerInMemoryRepository', () => {
 			id: 'id',
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
+			price: 10.0,
+
 			imageUrl: 'sample.jpg',
 			abv: 5.0,
 			ibu: 20,

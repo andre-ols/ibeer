@@ -25,6 +25,8 @@ describe('CreateBeerHandlerImpl', () => {
 		const beer = new CreateBeerCommand({
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
+			price: 10,
+
 			imageUrl: 'sample.jpg',
 			categoryId: '1',
 			abv: 1,
@@ -52,6 +54,7 @@ describe('CreateBeerHandlerImpl', () => {
 		const promise = sut.execute({
 			name: '',
 			description: '',
+			price: -1,
 			imageUrl: '',
 			categoryId: '1',
 			abv: -1,
@@ -72,6 +75,7 @@ describe('CreateBeerHandlerImpl', () => {
 		const beer = new CreateBeerCommand({
 			name: 'Sample Beer',
 			description: 'A sample beer description.',
+			price: 10,
 			imageUrl: 'sample.jpg',
 			categoryId: '1',
 			abv: 1,

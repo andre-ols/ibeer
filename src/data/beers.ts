@@ -4,6 +4,7 @@ export const beers = [
 		description:
 			'Mergulhe em uma jornada gustativa única com nossa Berliner Weisse com Yuzu. O alemão encontra o japonês enquanto o aroma cítrico do Yuzu dança no ar. A fermentação com levedura de lager em temperaturas ale cria uma experiência refrescante e efervescente. Feche os olhos e sinta a crocância de uma lager misturada à frutuosidade exótica de uma ale, transportando-o para um jardim de citros sob o sol japonês.',
 		imageUrl: '',
+		price: 28.0,
 		abv: 4.2,
 		ibu: 8,
 		ebc: 8,
@@ -17,6 +18,7 @@ export const beers = [
 		description:
 			'Sinta a explosão tropical em cada gole! Nossa IPA Tropical Burst é uma jornada pelos trópicos, onde lúpulos tropicais se misturam em uma dança aromática. Feche os olhos e imagine-se em uma ilha paradisíaca enquanto saboreia as notas intensas de manga, maracujá e abacaxi. Uma experiência sensorial que eleva a IPA a um novo patamar de frescor e sabor.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 6.5,
 		ibu: 45,
 		ebc: 12,
@@ -30,6 +32,7 @@ export const beers = [
 		description:
 			'Adentre um café artesanal com nossa Stout Café Imperial. O aroma de grãos de café torrados preenche o ar, enquanto cada gole revela camadas de complexidade. A infusão de café imperial durante a maturação proporciona uma riqueza profunda de sabores de café, complementada pela suavidade da levedura. Feche os olhos e sinta-se em uma cafeteria aconchegante, explorando nuances de torrefação e cafeína.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 7.8,
 		ibu: 35,
 		ebc: 40,
@@ -43,6 +46,7 @@ export const beers = [
 		description:
 			'Viaje para os campos de pêssegos na Provence com nossa Saison de Pêssego. Cada gole é como uma brisa fresca carregada com a doçura suculenta dos pêssegos locais. A levedura saison adiciona notas frutadas, enquanto a suavidade da cerveja evoca a sensação de um dia ensolarado. Feche os olhos e transporte-se para uma praia tropical, onde cada gole é como um mergulho revigorante no mar.',
 		imageUrl: '',
+		price: 22.9,
 		abv: 5.4,
 		ibu: 20,
 		ebc: 10,
@@ -56,6 +60,7 @@ export const beers = [
 		description:
 			'Experimente a doçura dourada em cada gota da nossa Golden Honey Ale. O mel cru adicionado no final da fervura empresta uma doçura floral que se equilibra perfeitamente com a base maltada. Feche os olhos e imagine-se em um campo de flores silvestres, com o néctar dourado da cerveja acariciando seu paladar, criando uma experiência única e celestial.',
 		imageUrl: '',
+		price: 25,
 		abv: 5,
 		ibu: 25,
 		ebc: 12,
@@ -69,6 +74,7 @@ export const beers = [
 		description:
 			'Sinta a brisa do oceano enquanto desfruta de nossa Gose de Melancia Refrescante. A melancia adicionada durante a fermentação mistura-se ao sal marinho, proporcionando uma experiência salgada e doce. Feche os olhos e imagine-se em uma praia tropical, onde cada gole é como um mergulho revigorante no mar.',
 		imageUrl: '',
+		price: 12.9,
 		abv: 4.5,
 		ibu: 12,
 		ebc: 6,
@@ -82,6 +88,7 @@ export const beers = [
 		description:
 			'Entre em um mosteiro belga com nossa Tripel Belga Dourada. Cada gole é uma jornada espiritual, onde a cepa de levedura belga cria uma sinfonia de ésteres frutados e notas condimentadas. Feche os olhos e sinta-se cercado pelo aroma celestial, enquanto a complexidade maltada e a secura no final elevam a experiência a um nível divino.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 8.5,
 		ibu: 30,
 		ebc: 15,
@@ -96,6 +103,7 @@ export const beers = [
 		description:
 			'Adentre uma confeitaria com nossa Amber Ale de Caramelo. A adição de maltes caramelizados durante a brassagem cria um espetáculo de caramelo, equilibrado pela harmonia entre maltes e lúpulos. Feche os olhos e imagine-se em um mundo de sabores aveludados, onde cada gole é uma indulgência reconfortante.',
 		imageUrl: '',
+		price: 19.9,
 		abv: 6,
 		ibu: 25,
 		ebc: 18,
@@ -108,10 +116,11 @@ export const beers = [
 		name: 'Session IPA Citrus Splash',
 		description:
 			'Navegue por um pomar cítrico com nossa Session IPA Citrus Splash. O aroma cítrico fresco e o perfil de sabor leve convidam você a um passeio sob o sol. Feche os olhos e sinta o frescor de lúpulos cítricos e notas de frutas enquanto saboreia esta cerveja de baixo teor alcoólico, perfeita para momentos despreocupados.',
+		imageUrl: '',
+		price: 14.9,
 		abv: 4,
 		ibu: 20,
 		ebc: 10,
-		imageUrl: '',
 		category: 'Session IPA',
 		foodPairing: ['Tacos de peixe', 'Salada de frutas', 'Sorvete de limão.'],
 		brewersTips:
@@ -122,6 +131,7 @@ export const beers = [
 		description:
 			'Entre em um jardim de especiarias com nossa Rye Pale Ale Picante. Cada gole é uma explosão de sabores, com o centeio adicionando um toque picante e terroso. Feche os olhos e imagine-se entre campos de grãos de centeio, explorando um mundo de complexidade e sabor.',
 		imageUrl: '',
+		price: 19.9,
 		abv: 5.8,
 		ibu: 35,
 		ebc: 14,
@@ -136,6 +146,7 @@ export const beers = [
 		description:
 			'Delicie-se em uma chocolateria com nossa Double Chocolate Porter. O cacau em pó e os nibs de cacau adicionados durante a fervura criam uma experiência decadente de chocolate. Feche os olhos e deixe-se envolver pela riqueza e suavidade, como se estivesse saboreando um pedaço de chocolate gourmet.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 7.2,
 		ibu: 40,
 		ebc: 30,
@@ -149,6 +160,7 @@ export const beers = [
 		description:
 			'Passeie por um campo de lúpulos com nossa Hoppy Wheat Beer. A base suave de trigo maltado é a tela perfeita para uma explosão de aromas lupulados. Feche os olhos e sinta-se imerso em uma plantação de lúpulos, onde cada gole é uma celebração de frescor e vitalidade.',
 		imageUrl: '',
+		price: 23.9,
 		abv: 5.5,
 		ibu: 40,
 		ebc: 10,
@@ -162,6 +174,7 @@ export const beers = [
 		description:
 			'Entre em uma sala de barris de carvalho com nossa Barleywine envelhecida. Cada gole é uma jornada pelo tempo, com as notas de baunilha e carvalho dançando no paladar. Feche os olhos e imagine-se entre barris envelhecidos, onde a maturação prolongada eleva esta cerveja a uma obra-prima de complexidade e suavidade.',
 		imageUrl: '',
+		price: 39.9,
 		abv: 11,
 		ibu: 50,
 		ebc: 25,
@@ -176,6 +189,7 @@ export const beers = [
 		description:
 			'Delicie-se em um pomar de cerejeiras com nossa Belgian Dubbel de Cereja. A adição de purê de cereja durante a fermentação secundária proporciona uma explosão de sabores frutados. Feche os olhos e sinta-se envolvido pelo aroma suave da lavanda, enquanto cada gole é uma jornada pela beleza dos campos floridos.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 7.5,
 		ibu: 28,
 		ebc: 20,
@@ -189,6 +203,7 @@ export const beers = [
 		description:
 			'Explore uma fogueira defumada com nossa Porter Defumada com Chipotle. Os maltes defumados e a pimenta chipotle adicionada durante a fervura criam um espetáculo de sabores defumados e picantes. Feche os olhos e imagine-se junto a uma fogueira, onde a ousadia desta cerveja desperta seus sentidos.',
 		imageUrl: '',
+		price: 22.9,
 		abv: 6.8,
 		ibu: 35,
 		ebc: 25,
@@ -202,6 +217,7 @@ export const beers = [
 		description:
 			'Mergulhe em um paraíso tropical com nossa Fruit Punch Gose. A adição de purês de frutas tropicais durante a fermentação proporciona uma explosão de frescor. Feche os olhos e imagine-se em uma ilha paradisíaca, onde cada gole é como um soco de frutas refrescante, equilibrado pelo toque salgado.',
 		imageUrl: '',
+		price: 12.9,
 		abv: 4.7,
 		ibu: 15,
 		ebc: 5,
@@ -215,6 +231,7 @@ export const beers = [
 		description:
 			'Passeie por campos de lavanda com nossa Blonde Ale com Lavanda. A infusão de flores de lavanda secas durante a fervura cria uma experiência floral delicada. Feche os olhos e sinta-se envolvido pelo aroma suave da lavanda, enquanto cada gole é uma jornada pela beleza dos campos floridos.',
 		imageUrl: '',
+		price: 16.9,
 		abv: 5.2,
 		ibu: 18,
 		ebc: 8,
@@ -229,6 +246,7 @@ export const beers = [
 		description:
 			'Percorra uma plantação de centeio com nossa Red Rye IPA. A combinação de maltes de centeio e lúpulos cítricos proporciona uma experiência única. Feche os olhos e imagine-se entre campos de centeio balançando ao vento, enquanto cada gole é uma celebração de picância e sabor.',
 		imageUrl: '',
+		price: 19.9,
 		abv: 6.3,
 		ibu: 40,
 		ebc: 15,
@@ -242,6 +260,7 @@ export const beers = [
 		description:
 			'Viaje para um mercado de especiarias com nossa Weizenbock de Banana e Canela. A cepa de levedura de trigo desenvolve intensos ésteres de banana, enquanto a canela adiciona um toque de especiaria. Feche os olhos e sinta-se imerso em um mercado exótico, onde cada gole é uma experiência sensorial repleta de sabores tropicais.',
 		imageUrl: '',
+		price: 29.9,
 		abv: 7,
 		ibu: 25,
 		ebc: 18,
@@ -255,6 +274,7 @@ export const beers = [
 		description:
 			'Explore um jardim de morangos com nossa Sour Ale de Morango e Manjericão. A adição de morangos frescos e manjericão durante a fermentação proporciona uma mistura refrescante e ácida. Feche os olhos e imagine-se entre canteiros de morangos maduros, enquanto cada gole é uma explosão de frescor e sofisticação.',
 		imageUrl: '',
+		price: 12.9,
 		abv: 5.5,
 		ibu: 12,
 		ebc: 6,
