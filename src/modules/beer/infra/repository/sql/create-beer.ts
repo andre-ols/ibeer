@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { Beer } from '../../../domain/model/beer'
+import { Beer } from '../../../domain/aggreagate/beer'
 import { CreateBeerRepository } from '../../../domain/repository/beer'
 
 export class CreateBeerSqlRepository implements CreateBeerRepository {

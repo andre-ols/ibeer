@@ -1,10 +1,10 @@
+import { CategoryBuilder } from '../../model/category'
 import { Abv } from '../../value-object/abv'
 import { CreatedAt } from '../../value-object/created-at'
 import { Ebc } from '../../value-object/ebc'
 import { Ibu } from '../../value-object/ibu'
 import { UpdatedAt } from '../../value-object/updated-at'
 import { BeerBuilder } from '../beer'
-import { CategoryBuilder } from '../category'
 
 const makeSut = () => {
 	const category = new CategoryBuilder().withName('Sample Category')

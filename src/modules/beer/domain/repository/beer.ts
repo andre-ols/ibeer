@@ -1,5 +1,5 @@
 import { Pagination } from '../../../core/querying/pagination'
-import { BeerBuilder } from '../model/beer'
+import { BeerBuilder } from '../aggreagate/beer'
 
 type Beer = ReturnType<BeerBuilder['build']>
 

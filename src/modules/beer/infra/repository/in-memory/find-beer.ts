@@ -5,7 +5,7 @@ import { Ebc } from '@/modules/beer/domain/value-object/ebc'
 import { Ibu } from '@/modules/beer/domain/value-object/ibu'
 import { UpdatedAt } from '@/modules/beer/domain/value-object/updated-at'
 import { NotFoundError } from '../../../../core/errors/not-found'
-import { BeerBuilder } from '../../../domain/model/beer'
+import { BeerBuilder } from '../../../domain/aggreagate/beer'
 import { FindBeerRepository } from '../../../domain/repository/beer'
 import { DataBeer } from './beers'
 

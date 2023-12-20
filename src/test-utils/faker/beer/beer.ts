@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { BeerBuilder } from '../../../modules/beer/domain/model/beer'
+import { BeerBuilder } from '../../../modules/beer/domain/aggreagate/beer'
 import { Abv } from '../../../modules/beer/domain/value-object/abv'
 import { Ebc } from '../../../modules/beer/domain/value-object/ebc'
 import { Ibu } from '../../../modules/beer/domain/value-object/ibu'

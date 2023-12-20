@@ -1,5 +1,5 @@
 import { NotFoundError } from '@/modules/core/errors/not-found'
-import { BeerBuilder } from '../../domain/model/beer'
+import { BeerBuilder } from '../../domain/aggreagate/beer'
 import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'
 import { Abv } from '../../domain/value-object/abv'
