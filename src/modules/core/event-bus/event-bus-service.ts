@@ -5,7 +5,7 @@ export interface IEventHandler<T extends BaseEvent> {
 	(event: T): void
 }
 export interface IEventBusSubscription<T extends BaseEvent> {
-	new (): T // Type-safe reference to event constructor
+	new (...args: any[]): T // Type-safe reference to event constructor
 }
 
 export interface EventBusService {
@@ -14,5 +14,8 @@ export interface EventBusService {
 		eventClass: IEventBusSubscription<T>,
 		handler: IEventHandler<T>,
 	): void
-	unsubscribe<T extends BaseEvent>(eventClass: { new (): T }, handler: IEventHandler<T>): void
+	unsubscribe<T extends BaseEvent>(
+		eventClass: IEventBusSubscription<T>,
+		handler: IEventHandler<T>,
+	): void
 }

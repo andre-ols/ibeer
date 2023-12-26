@@ -9,9 +9,6 @@ describe('EventBus', () => {
 			constructor() {
 				super()
 				this.setName('test')
-				this.setData({
-					test: 'test',
-				})
 			}
 		}
 
@@ -31,9 +28,6 @@ describe('EventBus', () => {
 			constructor() {
 				super()
 				this.setName('test')
-				this.setData({
-					test: 'test',
-				})
 			}
 		}
 
@@ -41,9 +35,6 @@ describe('EventBus', () => {
 			constructor() {
 				super()
 				this.setName('test2')
-				this.setData({
-					test: 'test',
-				})
 			}
 		}
 
@@ -67,9 +58,6 @@ describe('EventBus', () => {
 			constructor() {
 				super()
 				this.setName('test')
-				this.setData({
-					test: 'test',
-				})
 			}
 		}
 
@@ -92,9 +80,6 @@ describe('EventBus', () => {
 			constructor() {
 				super()
 				this.setName('test')
-				this.setData({
-					test: 'test',
-				})
 			}
 		}
 

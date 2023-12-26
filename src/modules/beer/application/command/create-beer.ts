@@ -1,5 +1,6 @@
 import { NotFoundError } from '@/modules/core/errors/not-found'
 import { EventBusService } from '@/modules/core/event-bus/event-bus-service'
+import { CreateProductEvent } from '../../../order/application/events/created-beer'
 import { BeerBuilder } from '../../domain/aggreagate/beer'
 import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'
@@ -8,7 +9,6 @@ import { CreatedAt } from '../../domain/value-object/created-at'
 import { Ebc } from '../../domain/value-object/ebc'
 import { Ibu } from '../../domain/value-object/ibu'
 import { UpdatedAt } from '../../domain/value-object/updated-at'
-import { CreatedBeerEvent } from '../events/created-beer'
 import { FindCategoryHandler } from '../query/find-category'
 
 export class CreateBeerCommand {
@@ -70,6 +70,11 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 
 		await this.beerRepository.execute(beer)
 
-		this.eventBusService.publish(new CreatedBeerEvent(beer))
+		this.eventBusService.publish(
+			new CreateProductEvent({
+				id: beer.id,
+				price: beer.price,
+			}),
+		)
 	}
 }

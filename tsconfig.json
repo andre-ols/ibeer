@@ -5,6 +5,8 @@
     "lib": [
       "ES2022"
     ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "moduleResolution": "node16",
     "rootDir": ".",
     "outDir": "dist",

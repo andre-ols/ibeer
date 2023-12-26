@@ -6,7 +6,6 @@ import { randomUUID } from 'crypto'
 export class Product {
 	constructor(
 		public readonly id: string,
-		public readonly quantity: number,
 		public readonly price: number,
 		public readonly createdAt: CreatedAt,
 		public readonly updatedAt: UpdatedAt,
@@ -15,10 +14,6 @@ export class Product {
 	validate() {
 		if (!this.id) {
 			throw new InvalidError('Product id is required')
-		}
-
-		if (this.quantity < 1) {
-			throw new InvalidError('Product quantity is required')
 		}
 
 		if (this.price < 0) {
@@ -33,7 +28,6 @@ export class Product {
 	toJSON() {
 		return {
 			id: this.id,
-			quantity: this.quantity,
 			price: this.price,
 			createdAt: this.createdAt.getValue(),
 			updatedAt: this.updatedAt.getValue(),
@@ -43,7 +37,6 @@ export class Product {
 
 export class ProductBuilder {
 	private id: string
-	private quantity?: number
 	private price?: number
 	private createdAt: CreatedAt
 	private updatedAt: UpdatedAt
@@ -64,11 +57,6 @@ export class ProductBuilder {
 		return this
 	}
 
-	withQuantity(quantity: number) {
-		this.quantity = quantity
-		return this
-	}
-
 	withCreatedAt(createdAt: CreatedAt) {
 		this.createdAt = createdAt
 		return this
@@ -83,9 +71,7 @@ export class ProductBuilder {
 		if (!this.price) {
 			throw new InvalidError('Product price is required')
 		}
-		if (!this.quantity) {
-			throw new InvalidError('Product quantity is required')
-		}
-		return new Product(this.id, this.quantity, this.price, this.createdAt, this.updatedAt)
+
+		return new Product(this.id, this.price, this.createdAt, this.updatedAt)
 	}
 }
