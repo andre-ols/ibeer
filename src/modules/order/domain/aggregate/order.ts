@@ -50,3 +50,30 @@ export class Order {
 		return this.status
 	}
 }
+
+export class OrderBuilder {
+	constructor(
+		private id: string,
+		private createdAt: CreatedAt,
+		private updatedAt: UpdatedAt,
+	) {}
+
+	withId(id: string) {
+		this.id = id
+		return this
+	}
+
+	withCreatedAt(createdAt: CreatedAt) {
+		this.createdAt = createdAt
+		return this
+	}
+
+	withUpdatedAt(updatedAt: UpdatedAt) {
+		this.updatedAt = updatedAt
+		return this
+	}
+
+	build() {
+		return new Order(this.id, this.createdAt, this.updatedAt)
+	}
+}

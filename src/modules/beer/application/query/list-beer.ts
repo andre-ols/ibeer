@@ -51,6 +51,7 @@ export class ListBeerHandlerImpl implements ListBeerHandler {
 			where: {
 				name: {
 					contains: query.name,
+					mode: 'insensitive',
 				},
 				abv: query.abv,
 				ibu: query.ibu,

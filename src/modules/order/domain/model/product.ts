@@ -1,20 +1,16 @@
-import { Beer } from '@/modules/beer/domain/aggreagate/beer'
 import { CreatedAt } from '@/modules/beer/domain/value-object/created-at'
 import { UpdatedAt } from '@/modules/beer/domain/value-object/updated-at'
 import { InvalidError } from '@/modules/core/errors/invalid'
 import { randomUUID } from 'crypto'
 
 export class Product {
-	public price: number
 	constructor(
 		public readonly id: string,
-		public beer: Beer,
 		public readonly quantity: number,
+		public readonly price: number,
 		public readonly createdAt: CreatedAt,
 		public readonly updatedAt: UpdatedAt,
-	) {
-		this.price = beer.price * quantity
-	}
+	) {}
 
 	validate() {
 		if (!this.id) {
@@ -25,6 +21,10 @@ export class Product {
 			throw new InvalidError('Product quantity is required')
 		}
 
+		if (this.price < 0) {
+			throw new InvalidError('Product price is required')
+		}
+
 		if (this.createdAt.getValue() > this.updatedAt.getValue()) {
 			throw new InvalidError('CreatedAt should be less than updatedAt')
 		}
@@ -33,7 +33,7 @@ export class Product {
 	toJSON() {
 		return {
 			id: this.id,
-			beer: this.beer.toJSON(),
+			quantity: this.quantity,
 			price: this.price,
 			createdAt: this.createdAt.getValue(),
 			updatedAt: this.updatedAt.getValue(),
@@ -43,8 +43,8 @@ export class Product {
 
 export class ProductBuilder {
 	private id: string
-	private beer?: Beer
 	private quantity?: number
+	private price?: number
 	private createdAt: CreatedAt
 	private updatedAt: UpdatedAt
 
@@ -59,8 +59,8 @@ export class ProductBuilder {
 		return this
 	}
 
-	withBeer(beer: Beer) {
-		this.beer = beer
+	withPrice(price: number) {
+		this.price = price
 		return this
 	}
 
@@ -80,12 +80,12 @@ export class ProductBuilder {
 	}
 
 	build() {
-		if (!this.beer) {
-			throw new InvalidError('Product beer is required')
+		if (!this.price) {
+			throw new InvalidError('Product price is required')
 		}
 		if (!this.quantity) {
 			throw new InvalidError('Product quantity is required')
 		}
-		return new Product(this.id, this.beer, this.quantity, this.createdAt, this.updatedAt)
+		return new Product(this.id, this.quantity, this.price, this.createdAt, this.updatedAt)
 	}
 }
