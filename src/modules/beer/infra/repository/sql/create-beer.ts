@@ -30,7 +30,6 @@ export class CreateBeerSqlRepository implements CreateBeerRepository {
 					id: beer.id,
 					name: beer.name,
 					description: beer.description,
-					price: beer.price,
 					imageUrl: beer.imageUrl,
 					abv: beer.abv.getValue(),
 					ibu: beer.ibu.getValue(),
