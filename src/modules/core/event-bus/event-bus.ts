@@ -61,3 +61,5 @@ export class EventBus {
 		subscriptions.forEach((handler) => handler(event))
 	}
 }
+
+export const eventBus = new EventBus()
