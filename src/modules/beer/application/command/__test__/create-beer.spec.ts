@@ -13,7 +13,15 @@ const makeSut = () => {
 		execute: jest.fn(),
 	}
 
-	const sut = new CreateBeerHandlerImpl(createBeerRepository, findCategoryHandler)
+	const eventBusService = {
+		publish: jest.fn(),
+	}
+
+	const sut = new CreateBeerHandlerImpl(
+		createBeerRepository,
+		findCategoryHandler,
+		eventBusService as any,
+	)
 
 	return { sut, createBeerRepository, findCategoryHandler }
 }

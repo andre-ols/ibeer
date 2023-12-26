@@ -5,6 +5,7 @@ import { categories } from '@/data/category'
 import { CreateBeerHandlerImpl } from '@/modules/beer/application/command/create-beer'
 import { FindCategoryHandlerImpl } from '@/modules/beer/application/query/find-category'
 import { CreateBeerSqlRepository } from '@/modules/beer/infra/repository/sql/create-beer'
+import { eventBus } from '@/modules/core/event-bus'
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'crypto'
 const prisma = new PrismaClient()
@@ -39,6 +40,7 @@ async function saveBeer() {
 	const createBeerHandler = new CreateBeerHandlerImpl(
 		new CreateBeerSqlRepository(prisma),
 		new FindCategoryHandlerImpl(prisma),
+		eventBus,
 	)
 
 	const formattedBeers = beers.map((beer) => {
