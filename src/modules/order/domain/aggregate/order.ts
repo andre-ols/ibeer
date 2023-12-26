@@ -1,4 +1,5 @@
 import { InvalidError } from '@/modules/core/errors/invalid'
+import { randomUUID } from 'crypto'
 import { CreatedAt } from '../../../beer/domain/value-object/created-at'
 import { UpdatedAt } from '../../../beer/domain/value-object/updated-at'
 import { Product } from '../model/product'
@@ -52,11 +53,15 @@ export class Order {
 }
 
 export class OrderBuilder {
-	constructor(
-		private id: string,
-		private createdAt: CreatedAt,
-		private updatedAt: UpdatedAt,
-	) {}
+	private id: string
+	private createdAt: CreatedAt
+	private updatedAt: UpdatedAt
+
+	constructor() {
+		this.id = randomUUID()
+		this.createdAt = new CreatedAt(new Date())
+		this.updatedAt = new UpdatedAt(new Date())
+	}
 
 	withId(id: string) {
 		this.id = id
