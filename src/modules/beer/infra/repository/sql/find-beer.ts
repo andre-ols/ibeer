@@ -29,7 +29,7 @@ export class FindBeerSqlRepository implements FindBeerRepository {
 			.withId(data.id)
 			.withName(data.name)
 			.withDescription(data.description)
-			.withPrice(data.price)
+
 			.withImageUrl(data.imageUrl)
 			.withAbv(new Abv(Number(data.abv)))
 			.withIbu(new Ibu(data.ibu))

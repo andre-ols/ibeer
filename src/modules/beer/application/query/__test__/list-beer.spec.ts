@@ -40,6 +40,7 @@ describe('ListBeerHandlerImpl', () => {
 			where: {
 				name: {
 					contains: listBeerQuery.name,
+					mode: 'insensitive',
 				},
 				abv: listBeerQuery.abv,
 				ibu: listBeerQuery.ibu,

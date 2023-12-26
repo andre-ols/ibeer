@@ -51,7 +51,7 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 		const beer = new BeerBuilder()
 			.withName(command.name)
 			.withDescription(command.description)
-			.withPrice(command.price)
+
 			.withImageUrl(command.imageUrl)
 			.withCategory(
 				new CategoryBuilder()
@@ -73,7 +73,7 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 		this.eventBusService.publish(
 			new CreateProductEvent({
 				id: beer.id,
-				price: beer.price,
+				price: command.price,
 			}),
 		)
 	}
