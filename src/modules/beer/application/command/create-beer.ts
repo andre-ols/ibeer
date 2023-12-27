@@ -1,6 +1,6 @@
 import { NotFoundError } from '@/modules/core/errors/not-found'
 import { EventBusService } from '@/modules/core/event-bus/event-bus-service'
-import { CreateProductEvent } from '../../../order/application/events/created-beer'
+import { CreateProductEvent } from '../../../order/application/events/create-product'
 import { BeerBuilder } from '../../domain/aggreagate/beer'
 import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'

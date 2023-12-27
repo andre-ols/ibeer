@@ -4,7 +4,6 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["metrics", "relationJoins"]
-  binaryTargets   = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -12,15 +11,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
+model Category {
   id        String   @id @unique
   name      String
   createdAt DateTime
   updatedAt DateTime
-  beer      beer[]
+  beer      Beer[]
 }
 
-model beer {
+model Beer {
   id          String   @id @unique
   name        String
   description String
@@ -30,7 +29,7 @@ model beer {
   ebc         Int
   foodPairing String[]
   brewersTips String
-  category    category @relation(fields: [categoryId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
   categoryId  String
   createdAt   DateTime
   updatedAt   DateTime
