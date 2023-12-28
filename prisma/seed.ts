@@ -3,11 +3,22 @@ import 'module-alias/register'
 import { beers } from '@/data/beers'
 import { categories } from '@/data/category'
 import { CreateBeerHandlerImpl } from '@/modules/beer/application/command/create-beer'
+import {
+	CreatedBeerEvent,
+	CreatedBeerHandlerImpl,
+} from '@/modules/beer/application/event/created-beer'
 import { FindCategoryHandlerImpl } from '@/modules/beer/application/query/find-category'
 import { CreateBeerSqlRepository } from '@/modules/beer/infra/repository/sql/create-beer'
+import { eventBus } from '@/modules/core/event-bus'
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'crypto'
 const prisma = new PrismaClient()
+
+console.log('Seeding...')
+
+const eventHandler = new CreatedBeerHandlerImpl()
+
+eventBus.subscribe(CreatedBeerEvent, (event) => eventHandler.execute(event))
 
 async function saveCategory() {
 	const data: {
@@ -39,6 +50,7 @@ async function saveBeer() {
 	const createBeerHandler = new CreateBeerHandlerImpl(
 		new CreateBeerSqlRepository(prisma),
 		new FindCategoryHandlerImpl(prisma),
+		eventBus,
 	)
 
 	const formattedBeers = beers.map((beer) => {
@@ -55,7 +67,7 @@ async function saveBeer() {
 		}
 	})
 
-	formattedBeers.forEach(async (beer) => {
+	for await (const beer of formattedBeers) {
 		await createBeerHandler.execute({
 			name: beer.name,
 			description: beer.description,
@@ -68,11 +80,12 @@ async function saveBeer() {
 			brewersTips: beer.brewersTips,
 			categoryId: beer.categoryId,
 		})
-	})
+	}
 }
 
 async function main() {
 	await saveBeer()
+	console.log('Seeding finished!')
 }
 
 main()

@@ -14,3 +14,16 @@ services:
     ports:
       - '5432:5432'
     restart: always
+
+  mongo:
+    container_name: mongo
+    image: mongo:7.0-rc-jammy
+    volumes:
+      - ./db/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    ports:
+      - '27017:27017'
+    restart: always

@@ -70,7 +70,7 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 
 		await this.beerRepository.execute(beer)
 
-		const eventCreatedBeer = new CreatedBeerEvent(beer)
+		const eventCreatedBeer = new CreatedBeerEvent(beer.toJSON())
 
 		this.eventBus.publish(eventCreatedBeer)
 	}
