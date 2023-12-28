@@ -1,4 +1,4 @@
-import { HttpResponse } from '@/modules/core/protocols/http'
+import { HttpRequest, HttpResponse } from '@/modules/core/api/protocols/http'
 import { created } from '../../../core/api/helpers/http-response'
 import { CreateOrderCommand, CreateOrderHandler } from '../../application/command/create-order'
 
@@ -7,8 +7,8 @@ export interface CreateOrderController {
 }
 
 export namespace CreateOrderController {
-	export type Request = {
-		body: {
+	export type Request = HttpRequest<
+		{
 			beers: Array<{
 				id: string
 				quantity: number
@@ -19,8 +19,10 @@ export namespace CreateOrderController {
 				expirationDate: string
 				cvv: string
 			}
-		}
-	}
+		},
+		undefined,
+		undefined
+	>
 
 	export type Result = HttpResponse<void>
 }

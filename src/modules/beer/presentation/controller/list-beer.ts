@@ -1,5 +1,5 @@
 import { badRequest, ok } from '../../../core/api/helpers/http-response'
-import { HttpResponse } from '../../../core/protocols/http'
+import { HttpRequest, HttpResponse } from '../../../core/api/protocols/http'
 import { Pagination } from '../../../core/querying/pagination'
 import { ListBeerHandler } from '../../application/query/list-beer'
 
@@ -8,8 +8,10 @@ export interface ListBeerController {
 }
 
 export namespace ListBeerController {
-	export type Request = {
-		query: {
+	export type Request = HttpRequest<
+		undefined,
+		undefined,
+		{
 			abv?: number
 			ibu?: number
 			ebc?: number
@@ -17,7 +19,7 @@ export namespace ListBeerController {
 			page?: number
 			limit?: number
 		}
-	}
+	>
 
 	export type Result = HttpResponse<
 		Array<{

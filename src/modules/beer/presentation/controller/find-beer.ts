@@ -1,5 +1,5 @@
 import { ok } from '../../../core/api/helpers/http-response'
-import { HttpResponse } from '../../../core/protocols/http'
+import { HttpRequest, HttpResponse } from '../../../core/api/protocols/http'
 import { FindBeerHandler } from '../../application/query/find-beer'
 
 export interface FindBeerController {
@@ -7,11 +7,13 @@ export interface FindBeerController {
 }
 
 export namespace FindBeerController {
-	export type Request = {
-		params: {
+	export type Request = HttpRequest<
+		undefined,
+		{
 			id: string
-		}
-	}
+		},
+		undefined
+	>
 
 	export type Result = HttpResponse<{
 		id: string

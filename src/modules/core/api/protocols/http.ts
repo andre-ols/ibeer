@@ -9,3 +9,9 @@ export type HttpResponse<T = any> = {
 		totalCount: number
 	}
 }
+
+export type HttpRequest<T = any, K = any, Q = any> = {
+	body: T
+	params: K
+	query: Q
+}
