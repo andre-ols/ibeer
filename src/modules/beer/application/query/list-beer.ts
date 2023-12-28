@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { BeerModel } from '@/modules/core/db/nosql/mongo-client'
 import { Pagination } from '../../../core/querying/pagination'
 
 export class ListBeerQuery {
@@ -39,41 +39,30 @@ export interface ListBeerHandler {
 }
 
 export class ListBeerHandlerImpl implements ListBeerHandler {
-	constructor(private readonly prismaClient: PrismaClient) {}
+	constructor(private readonly beerModel: typeof BeerModel) {}
 
 	async execute(query: ListBeerQuery) {
 		const pagination = new Pagination()
 		pagination.setPage(query.page)
 		pagination.setLimit(query.limit)
 
-		// find and count in one query
-		const total = await this.prismaClient.beer.count({
-			where: {
-				name: {
-					contains: query.name,
-					mode: 'insensitive',
-				},
-				abv: query.abv,
-				ibu: query.ibu,
-				ebc: query.ebc,
-			},
-		})
+		const nameFilter = query.name ? { name: { $regex: new RegExp(query.name, 'i') } } : {}
+		const queryFilter = {
+			...nameFilter,
+			...(query.abv !== undefined ? { abv: query.abv } : {}),
+			...(query.ibu !== undefined ? { ibu: query.ibu } : {}),
+			...(query.ebc !== undefined ? { ebc: query.ebc } : {}),
+		}
 
-		const beers = await this.prismaClient.beer.findMany({
-			skip: pagination.getOffset(),
-			take: pagination.getLimit(),
-			where: {
-				name: {
-					contains: query.name,
-				},
-				abv: query.abv,
-				ibu: query.ibu,
-				ebc: query.ebc,
-			},
-			include: {
-				category: true,
-			},
-		})
+		const [beers, total] = await Promise.all([
+			this.beerModel
+				.find(queryFilter)
+				.skip(pagination.getOffset())
+				.limit(pagination.getLimit())
+				.lean(), // Use lean() to get plain JavaScript objects instead of Mongoose documents
+
+			this.beerModel.countDocuments(queryFilter),
+		])
 
 		return {
 			beers,

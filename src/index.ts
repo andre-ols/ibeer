@@ -7,6 +7,7 @@ import { ListBeerHandlerImpl } from './modules/beer/application/query/list-beer'
 import { FindBeerSqlRepository } from './modules/beer/infra/repository/sql/find-beer'
 import { FindBeerControllerImpl } from './modules/beer/presentation/controller/find-beer'
 import { ListBeerControllerImpl } from './modules/beer/presentation/controller/list-beer'
+import { BeerModel } from './modules/core/db/nosql/mongo-client'
 import { prismaClient } from './modules/core/db/sql/prisma-client'
 import { CreateOrderHandlerImpl } from './modules/order/application/command/create-order'
 import { CreateOrderSqlRepository } from './modules/order/infra/repository/sql/create-order'
@@ -20,7 +21,7 @@ app.use(cors())
 app.get('/beer', (req: Request, res) => {
 	const { query } = req
 
-	const controller = new ListBeerControllerImpl(new ListBeerHandlerImpl(prismaClient))
+	const controller = new ListBeerControllerImpl(new ListBeerHandlerImpl(BeerModel))
 
 	controller
 		.execute({
@@ -49,7 +50,7 @@ app.get('/beer', (req: Request, res) => {
 app.get('/beer/:id', (req: Request, res) => {
 	const { id } = req.params
 
-	const controller = new FindBeerControllerImpl(new FindBeerHandlerImpl(prismaClient))
+	const controller = new FindBeerControllerImpl(new FindBeerHandlerImpl(BeerModel))
 
 	controller
 		.execute({

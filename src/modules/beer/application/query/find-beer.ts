@@ -1,5 +1,5 @@
+import { BeerModel } from '@/modules/core/db/nosql/mongo-client'
 import { NotFoundError } from '@/modules/core/errors/not-found'
-import { PrismaClient } from '@prisma/client'
 
 export class FindBeerQuery {
 	id: string
@@ -30,17 +30,10 @@ export interface FindBeerHandler {
 	}>
 }
 export class FindBeerHandlerImpl implements FindBeerHandler {
-	constructor(private readonly prismaClient: PrismaClient) {}
+	constructor(private readonly beerModel: typeof BeerModel) {}
 
 	async execute(query: FindBeerQuery) {
-		const beer = await this.prismaClient.beer.findUnique({
-			where: {
-				id: query.id,
-			},
-			include: {
-				category: true,
-			},
-		})
+		const beer = await this.beerModel.findOne({ id: query.id }).lean()
 
 		if (!beer) {
 			throw new NotFoundError('Beer')
