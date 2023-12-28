@@ -1,4 +1,4 @@
-import { BeerModel } from '@/modules/core/db/nosql/mongo-client'
+import { BeerModel } from '@/modules/core/db/nosql/schema'
 import { Pagination } from '../../../core/querying/pagination'
 
 export class ListBeerQuery {
@@ -46,9 +46,8 @@ export class ListBeerHandlerImpl implements ListBeerHandler {
 		pagination.setPage(query.page)
 		pagination.setLimit(query.limit)
 
-		const nameFilter = query.name ? { name: { $regex: new RegExp(query.name, 'i') } } : {}
 		const queryFilter = {
-			...nameFilter,
+			...(query.name !== undefined ? { name: { $regex: new RegExp(query.name, 'i') } } : {}),
 			...(query.abv !== undefined ? { abv: query.abv } : {}),
 			...(query.ibu !== undefined ? { ibu: query.ibu } : {}),
 			...(query.ebc !== undefined ? { ebc: query.ebc } : {}),

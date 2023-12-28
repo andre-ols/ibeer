@@ -1,11 +1,12 @@
 import { ListBeerHandlerImpl, ListBeerQuery } from '../list-beer'
 
 const makeSut = () => {
-	const prismaClient = {
-		beer: {
-			findMany: jest.fn(),
-			count: jest.fn(),
-		},
+	const beerModel = {
+		find: jest.fn().mockReturnThis(),
+		skip: jest.fn().mockReturnThis(),
+		limit: jest.fn().mockReturnThis(),
+		lean: jest.fn().mockResolvedValue([]),
+		countDocuments: jest.fn(),
 	}
 
 	const listBeerQuery = new ListBeerQuery({
@@ -17,55 +18,44 @@ const makeSut = () => {
 		name: 'Sample',
 	})
 
-	const sut = new ListBeerHandlerImpl(prismaClient as any)
+	const sut = new ListBeerHandlerImpl(beerModel as any)
 
 	return {
 		sut,
 		listBeerQuery,
-		prismaClient,
+		beerModel,
 	}
 }
 
 describe('ListBeerHandlerImpl', () => {
 	test('should call prisma client with the correct parameters', async () => {
 		// arrange
-		const { sut, prismaClient, listBeerQuery } = makeSut()
+		const { sut, beerModel, listBeerQuery } = makeSut()
 
-		jest.spyOn(prismaClient.beer, 'count').mockResolvedValueOnce(0)
+		const queryFilter = {
+			...(listBeerQuery.name !== undefined
+				? { name: { $regex: new RegExp(listBeerQuery.name, 'i') } }
+				: {}),
+			...(listBeerQuery.abv !== undefined ? { abv: listBeerQuery.abv } : {}),
+			...(listBeerQuery.ibu !== undefined ? { ibu: listBeerQuery.ibu } : {}),
+			...(listBeerQuery.ebc !== undefined ? { ebc: listBeerQuery.ebc } : {}),
+		}
+
+		jest.spyOn(beerModel, 'countDocuments').mockResolvedValueOnce(0)
 
 		// act
 		await sut.execute(listBeerQuery)
 
-		expect(prismaClient.beer.count).toHaveBeenCalledWith({
-			where: {
-				name: {
-					contains: listBeerQuery.name,
-					mode: 'insensitive',
-				},
-				abv: listBeerQuery.abv,
-				ibu: listBeerQuery.ibu,
-				ebc: listBeerQuery.ebc,
-			},
-		})
+		expect(beerModel.countDocuments).toHaveBeenCalledWith(queryFilter)
 
-		expect(prismaClient.beer.findMany).toHaveBeenCalledWith({
-			where: {
-				name: {
-					contains: listBeerQuery.name,
-				},
-				abv: listBeerQuery.abv,
-				ibu: listBeerQuery.ibu,
-				ebc: listBeerQuery.ebc,
-			},
-			take: listBeerQuery.limit,
-			skip: listBeerQuery.limit * (listBeerQuery.page - 1),
-			include: {
-				category: true,
-			},
-		})
+		expect(beerModel.find).toHaveBeenCalledWith(queryFilter)
+
+		expect(beerModel.skip).toHaveBeenCalledWith(0)
+
+		expect(beerModel.limit).toHaveBeenCalledWith(10)
 	})
 	test('should return the result from prisma client', async () => {
-		const { sut, prismaClient, listBeerQuery } = makeSut()
+		const { sut, beerModel, listBeerQuery } = makeSut()
 
 		const expectedResult = {
 			beers: [
@@ -87,8 +77,8 @@ describe('ListBeerHandlerImpl', () => {
 			total: 1,
 		}
 
-		jest.spyOn(prismaClient.beer, 'count').mockResolvedValueOnce(1)
-		jest.spyOn(prismaClient.beer, 'findMany').mockResolvedValue([
+		jest.spyOn(beerModel, 'countDocuments').mockResolvedValueOnce(1)
+		jest.spyOn(beerModel, 'lean').mockResolvedValue([
 			{
 				id: 1,
 				name: 'Sample Beer',

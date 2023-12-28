@@ -1,4 +1,4 @@
-import { BeerModel } from '@/modules/core/db/nosql/mongo-client'
+import { BeerModel } from '@/modules/core/db/nosql/schema'
 import { NotFoundError } from '@/modules/core/errors/not-found'
 
 export class FindBeerQuery {

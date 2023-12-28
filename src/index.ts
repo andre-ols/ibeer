@@ -7,12 +7,15 @@ import { ListBeerHandlerImpl } from './modules/beer/application/query/list-beer'
 import { FindBeerSqlRepository } from './modules/beer/infra/repository/sql/find-beer'
 import { FindBeerControllerImpl } from './modules/beer/presentation/controller/find-beer'
 import { ListBeerControllerImpl } from './modules/beer/presentation/controller/list-beer'
-import { BeerModel } from './modules/core/db/nosql/mongo-client'
+import { connect } from './modules/core/db/nosql/connection'
+import { BeerModel } from './modules/core/db/nosql/schema'
 import { prismaClient } from './modules/core/db/sql/prisma-client'
 import { CreateOrderHandlerImpl } from './modules/order/application/command/create-order'
 import { CreateOrderSqlRepository } from './modules/order/infra/repository/sql/create-order'
 import { CreateOrderControllerImpl } from './modules/order/presentation/controller/create-order'
 const app = express()
+
+connect()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

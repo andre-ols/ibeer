@@ -1,4 +1,4 @@
-import { BeerModel } from '@/modules/core/db/nosql/mongo-client'
+import { BeerModel } from '@/modules/core/db/nosql/schema'
 import { BaseEvent } from '@/modules/core/event-bus'
 
 type Data = {
