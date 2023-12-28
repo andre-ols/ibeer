@@ -1,4 +1,4 @@
-import { BeerBuilder } from '@/modules/beer/domain/aggreagate/beer'
+import { BeerBuilder } from '@/modules/beer/domain/aggregate/beer'
 import { CategoryBuilder } from '@/modules/beer/domain/model/category'
 import { Abv } from '@/modules/beer/domain/value-object/abv'
 import { CreatedAt } from '@/modules/beer/domain/value-object/created-at'

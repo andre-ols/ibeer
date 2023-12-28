@@ -1,4 +1,4 @@
-import { Beer } from '@/modules/beer/domain/aggreagate/beer'
+import { Beer } from '@/modules/beer/domain/aggregate/beer'
 import { Pagination } from '../../../../../core/querying/pagination'
 import { ListBeerRepository } from '../../../../domain/repository/beer'
 import { DataBeer } from '../beers'

@@ -4,7 +4,7 @@ import { CreatedAt } from '@/modules/beer/domain/value-object/created-at'
 import { Ebc } from '@/modules/beer/domain/value-object/ebc'
 import { Ibu } from '@/modules/beer/domain/value-object/ibu'
 import { UpdatedAt } from '@/modules/beer/domain/value-object/updated-at'
-import { BeerBuilder } from '../../../domain/aggreagate/beer'
+import { BeerBuilder } from '../../../domain/aggregate/beer'
 import { ListBeerRepository } from '../../../domain/repository/beer'
 import { DataBeer } from './beers'
 

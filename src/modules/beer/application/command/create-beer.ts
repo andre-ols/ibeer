@@ -1,5 +1,6 @@
 import { NotFoundError } from '@/modules/core/errors/not-found'
-import { BeerBuilder } from '../../domain/aggreagate/beer'
+import { EventBus } from '@/modules/core/event-bus'
+import { BeerBuilder } from '../../domain/aggregate/beer'
 import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'
 import { Abv } from '../../domain/value-object/abv'
@@ -7,6 +8,7 @@ import { CreatedAt } from '../../domain/value-object/created-at'
 import { Ebc } from '../../domain/value-object/ebc'
 import { Ibu } from '../../domain/value-object/ibu'
 import { UpdatedAt } from '../../domain/value-object/updated-at'
+import { CreatedBeerEvent } from '../event/created-beer'
 import { FindCategoryHandler } from '../query/find-category'
 
 export class CreateBeerCommand {
@@ -34,6 +36,7 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 	constructor(
 		private readonly beerRepository: CreateBeerRepository,
 		private readonly findCategoryHandler: FindCategoryHandler,
+		private readonly eventBus: EventBus,
 	) {}
 
 	async execute(command: CreateBeerCommand) {
@@ -66,5 +69,9 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 			.build()
 
 		await this.beerRepository.execute(beer)
+
+		const eventCreatedBeer = new CreatedBeerEvent(beer)
+
+		this.eventBus.publish(eventCreatedBeer)
 	}
 }
