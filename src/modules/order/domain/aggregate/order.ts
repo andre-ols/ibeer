@@ -2,20 +2,26 @@ import { InvalidError } from '@/modules/core/errors/invalid'
 import { randomUUID } from 'crypto'
 import { CreatedAt } from '../../../beer/domain/value-object/created-at'
 import { UpdatedAt } from '../../../beer/domain/value-object/updated-at'
-import { Product } from '../model/product'
-import { OrderStatus } from '../value-object/order-status'
+import { Payment } from '../model/payment'
+import { StatusOrder } from '../value-object/order-status'
 
 export class Order {
 	private price: number
-	private status: OrderStatus
-	private products: Product[]
+	private status: StatusOrder
+	private beers: {
+		id: string
+		unitPrice: number
+		quantity: number
+	}[]
 	constructor(
 		public readonly id: string,
+		public readonly payment: Payment,
 		public readonly createdAt: CreatedAt,
 		public readonly updatedAt: UpdatedAt,
 	) {
-		this.status = OrderStatus.PENDING
+		this.status = StatusOrder.PENDING
 		this.price = 0
+		this.beers = []
 		this.validate()
 	}
 
@@ -29,31 +35,44 @@ export class Order {
 		}
 	}
 
-	addProduct(product: Product) {
-		this.price += product.price
-		this.products.push(product)
+	addBeer(id: string, unitPrice: number, quantity: number) {
+		this.price += unitPrice * quantity
+		this.beers.push({ id, unitPrice, quantity })
 	}
 
-	removeProduct(product: Product) {
-		this.price -= product.price
-		this.products = this.products.filter((p) => p.id !== product.id)
+	removeBeer(id: string) {
+		const beer = this.beers.find((beer) => beer.id === id)
+		if (!beer) {
+			throw new Error('Beer not found')
+		}
+		this.price -= beer.unitPrice * beer.quantity
+		this.beers = this.beers.filter((beer) => beer.id !== id)
 	}
 
 	cancel() {
-		this.status = OrderStatus.CANCELLED
+		this.status = StatusOrder.CANCELLED
 	}
 
 	pay() {
-		this.status = OrderStatus.PAID
+		this.status = StatusOrder.PAID
 	}
 
 	getStatus() {
 		return this.status
 	}
+
+	getPrice() {
+		return this.price
+	}
+
+	getBeers() {
+		return this.beers
+	}
 }
 
 export class OrderBuilder {
 	private id: string
+	private payment: Payment
 	private createdAt: CreatedAt
 	private updatedAt: UpdatedAt
 
@@ -68,6 +87,11 @@ export class OrderBuilder {
 		return this
 	}
 
+	withPayment(payment: Payment) {
+		this.payment = payment
+		return this
+	}
+
 	withCreatedAt(createdAt: CreatedAt) {
 		this.createdAt = createdAt
 		return this
@@ -79,6 +103,9 @@ export class OrderBuilder {
 	}
 
 	build() {
-		return new Order(this.id, this.createdAt, this.updatedAt)
+		if (!this.payment) {
+			throw new InvalidError('payment')
+		}
+		return new Order(this.id, this.payment, this.createdAt, this.updatedAt)
 	}
 }

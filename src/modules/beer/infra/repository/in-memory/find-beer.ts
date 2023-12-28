@@ -25,6 +25,7 @@ export class FindBeerInMemoryRepository implements FindBeerRepository {
 					.withId(beer.id)
 					.withName(beer.name)
 					.withDescription(beer.description)
+					.withPrice(beer.price)
 
 					.withImageUrl(beer.imageUrl)
 					.withAbv(new Abv(beer.abv))

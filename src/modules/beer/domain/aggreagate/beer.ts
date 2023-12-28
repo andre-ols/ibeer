@@ -13,6 +13,7 @@ export class Beer {
 		readonly name: string,
 		readonly description: string,
 		readonly imageUrl: string,
+		readonly price: number,
 		readonly abv: Abv,
 		readonly ibu: Ibu,
 		readonly ebc: Ebc,
@@ -35,7 +36,9 @@ export class Beer {
 		if (this.description.length < 1) {
 			throw new InvalidError('description')
 		}
-		;[]
+		if (this.price < 1) {
+			throw new InvalidError('price')
+		}
 		if (this.imageUrl.length < 1) {
 			throw new InvalidError('imageUrl')
 		}
@@ -66,6 +69,7 @@ export class BeerBuilder {
 	private id: string
 	private name?: string
 	private description?: string
+	private price?: number
 	private imageUrl?: string
 	private abv?: Abv
 	private ibu?: Ibu
@@ -94,6 +98,11 @@ export class BeerBuilder {
 
 	withDescription(description: string): BeerBuilder {
 		this.description = description
+		return this
+	}
+
+	withPrice(price: number): BeerBuilder {
+		this.price = price
 		return this
 	}
 
@@ -145,7 +154,7 @@ export class BeerBuilder {
 	build(): Beer {
 		if (!this.name) throw new InvalidError('Beer Name is required')
 		if (!this.description) throw new InvalidError('Beer Description is required')
-
+		if (!this.price) throw new InvalidError('Beer Price is required')
 		if (!this.imageUrl) throw new InvalidError('Beer Image Url is required')
 		if (!this.abv) throw new InvalidError('Beer Abv is required')
 		if (!this.ibu) throw new InvalidError('Beer Ibu is required')
@@ -159,6 +168,7 @@ export class BeerBuilder {
 			this.name,
 			this.description,
 			this.imageUrl,
+			this.price,
 			this.abv,
 			this.ibu,
 			this.ebc,

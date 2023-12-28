@@ -3,28 +3,11 @@ import 'module-alias/register'
 import { beers } from '@/data/beers'
 import { categories } from '@/data/category'
 import { CreateBeerHandlerImpl } from '@/modules/beer/application/command/create-beer'
-import { FindBeerHandlerImpl } from '@/modules/beer/application/query/find-beer'
 import { FindCategoryHandlerImpl } from '@/modules/beer/application/query/find-category'
 import { CreateBeerSqlRepository } from '@/modules/beer/infra/repository/sql/create-beer'
-import { eventBus } from '@/modules/core/event-bus'
-import { CreateProductHandlerImpl } from '@/modules/order/application/command/create-product'
-import { CreateProductEvent } from '@/modules/order/application/events/create-product'
-import { CreateProductSqlRepository } from '@/modules/order/infra/repository/sql/create-product'
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'crypto'
 const prisma = new PrismaClient()
-
-const createProduct = new CreateProductHandlerImpl(
-	new CreateProductSqlRepository(prisma),
-	new FindBeerHandlerImpl(prisma),
-)
-
-eventBus.subscribe(CreateProductEvent, (event) => {
-	createProduct.execute({
-		beerId: event.data.id,
-		price: event.data.price,
-	})
-})
 
 async function saveCategory() {
 	const data: {
@@ -56,7 +39,6 @@ async function saveBeer() {
 	const createBeerHandler = new CreateBeerHandlerImpl(
 		new CreateBeerSqlRepository(prisma),
 		new FindCategoryHandlerImpl(prisma),
-		eventBus,
 	)
 
 	const formattedBeers = beers.map((beer) => {

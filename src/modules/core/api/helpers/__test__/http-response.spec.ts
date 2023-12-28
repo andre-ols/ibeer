@@ -88,12 +88,10 @@ describe('HTTP Responses', () => {
 
 	describe('created', () => {
 		test('should return a 201 response with data', () => {
-			const data = { id: 1, name: 'Created' }
-			const response = created(data)
+			const response = created()
 
 			expect(response.statusCode).toBe(201)
 			expect(response.error).not.toBeDefined()
-			expect(response.data).toBe(data)
 		})
 	})
 })

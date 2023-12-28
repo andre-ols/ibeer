@@ -1,6 +1,4 @@
 import { NotFoundError } from '@/modules/core/errors/not-found'
-import { EventBusService } from '@/modules/core/event-bus/event-bus-service'
-import { CreateProductEvent } from '../../../order/application/events/create-product'
 import { BeerBuilder } from '../../domain/aggreagate/beer'
 import { CategoryBuilder } from '../../domain/model/category'
 import { CreateBeerRepository } from '../../domain/repository/beer'
@@ -36,7 +34,6 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 	constructor(
 		private readonly beerRepository: CreateBeerRepository,
 		private readonly findCategoryHandler: FindCategoryHandler,
-		private readonly eventBusService: EventBusService,
 	) {}
 
 	async execute(command: CreateBeerCommand) {
@@ -51,8 +48,8 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 		const beer = new BeerBuilder()
 			.withName(command.name)
 			.withDescription(command.description)
-
 			.withImageUrl(command.imageUrl)
+			.withPrice(command.price)
 			.withCategory(
 				new CategoryBuilder()
 					.withId(category.id)
@@ -69,12 +66,5 @@ export class CreateBeerHandlerImpl implements CreateBeerHandler {
 			.build()
 
 		await this.beerRepository.execute(beer)
-
-		this.eventBusService.publish(
-			new CreateProductEvent({
-				id: beer.id,
-				price: command.price,
-			}),
-		)
 	}
 }

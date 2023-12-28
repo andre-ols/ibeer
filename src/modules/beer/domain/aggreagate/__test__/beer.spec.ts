@@ -24,6 +24,7 @@ describe('Beer', () => {
 				.withName('Sample Beer')
 				.withDescription('A sample beer description.')
 				.withImageUrl('sample.jpg')
+				.withPrice(10)
 				.withFoodPairing(['Food 1', 'Food 2'])
 				.withBrewersTips('Some brewing tips.')
 				.build()

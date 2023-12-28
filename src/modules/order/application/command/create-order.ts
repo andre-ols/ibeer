@@ -1,10 +1,20 @@
+import { FindBeerRepository } from '@/modules/beer/domain/repository/beer'
+import { NotFoundError } from '@/modules/core/errors/not-found'
 import { OrderBuilder } from '../../domain/aggregate/order'
-import { Product } from '../../domain/model/product'
+import { PaymentBuilder } from '../../domain/model/payment'
 import { CreateOrderRepository } from '../../domain/repository/order'
-import { FindProductRepository } from '../../domain/repository/product'
 
 export class CreateOrderCommand {
-	productIds: string[]
+	beers: Array<{
+		id: string
+		quantity: number
+	}>
+	payment: {
+		cardNumber: string
+		holderName: string
+		expirationDate: string
+		cvv: string
+	}
 
 	constructor(params: CreateOrderCommand) {
 		Object.assign(this, params)
@@ -18,25 +28,52 @@ export interface CreateOrderHandler {
 export class CreateOrderHandlerImpl implements CreateOrderHandler {
 	constructor(
 		private readonly orderRepository: CreateOrderRepository,
-		private readonly findProductRepository: FindProductRepository,
+		private readonly findBeerRepository: FindBeerRepository,
 	) {}
 
 	async execute(command: CreateOrderCommand) {
 		// TODO: implement unit of work
 
-		const products = await Promise.all(
-			command.productIds.map((productId) => this.findProductRepository.execute(productId)),
+		console.log('command', command)
+
+		const beers = await Promise.all(
+			command.beers.map((beer) => {
+				return this.findBeerRepository.execute({
+					id: beer.id,
+				})
+			}),
 		)
 
-		const invalidProducts = products.filter((product) => !product)
+		console.log('beers', beers)
 
-		if (invalidProducts.length) {
-			throw new Error('Invalid products found')
+		const invalidBeers = beers.filter((beer) => !beer)
+
+		if (invalidBeers.length) {
+			throw new NotFoundError(`Beer ${invalidBeers[0]!.id}`)
 		}
 
-		const order = new OrderBuilder().build()
+		if (beers.length !== command.beers.length) {
+			throw new Error('Invalid beers found')
+		}
 
-		products.forEach((product) => order.addProduct(product as Product))
+		const validBeers = beers.map((beer, index) => ({
+			id: beer!.id,
+			price: beer!.price,
+			quantity: command.beers[index].quantity,
+		}))
+
+		const order = new OrderBuilder()
+			.withPayment(
+				new PaymentBuilder()
+					.withCardNumber(command.payment.cardNumber)
+					.withHolderName(command.payment.holderName)
+					.withExpirationDate(command.payment.expirationDate)
+					.withCvv(command.payment.cvv)
+					.build(),
+			)
+			.build()
+
+		validBeers.forEach((beer) => order.addBeer(beer.id, beer.price, beer.quantity))
 
 		// TODO: integrate with payment gateway
 

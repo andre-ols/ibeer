@@ -43,7 +43,6 @@ export const noContent = (): HttpResponse => ({
 	statusCode: 204,
 })
 
-export const created = <T>(data: T): HttpResponse<T> => ({
+export const created = <T>(): HttpResponse<T> => ({
 	statusCode: 201,
-	data: data,
 })
