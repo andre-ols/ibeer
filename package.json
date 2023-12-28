@@ -29,6 +29,7 @@
   },
   "scripts": {
     "dev": "yarn --env-file=.env nodemon",
+    "docker:up": "docker compose --env-file .env up -d --build --force-recreate app_dev",
     "start": "node build/src/main.js",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",

@@ -27,3 +27,26 @@ services:
     ports:
       - '27017:27017'
     restart: always
+
+  app_dev:
+    container_name: app_dev
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - './src/:/usr/app/src/'
+      - './assets/:/usr/app/assets/'
+      - './prisma/:/usr/app/prisma/'
+    command: bash -c "npm run dev"
+    ports:
+      - '3333:3333'
+    depends_on:
+      - psql
+      - mongo
+    links:
+      - psql
+      - mongo
+    environment:
+      - NODE_ENV=development
