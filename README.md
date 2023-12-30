@@ -48,13 +48,16 @@ Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema.
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/ibeer.git
+git clone https://github.com/andre-ols/ibeer.git
 
 # Navegue até o diretório do projeto
 cd ibeer
 
 # Inicie os contêineres Docker
-docker-compose up -d
+docker compose --env-file .env up -d --build --force-recreate app_dev
+
+# Rode as migrations do Prisma
+docker compose --env-file .env exec app_dev yarn prisma migrate reset
 ```
 
 ## Configuração
