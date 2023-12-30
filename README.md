@@ -16,19 +16,15 @@ O **ibeer** é composto por 2 Bounded Contexts:
 
 ## Estrutura do Projeto
 
-[module]/
-|-- presentation/
-|-- application/
-| |-- command/
-| |-- query/
-| |-- event/
-|-- domain/
-| |-- aggregate/
-| |-- model/
-| |-- value-object/
-| |-- repository/
-|-- infra/
-|-- repository/
+O **ibeer** é composto por 4 camadas:
+
+- **Application**: responsável por orquestrar as operações de negócio.
+
+- **Domain**: responsável por definir as regras de negócio.
+
+- **Infrastructure**: responsável por implementar as integrações com serviços externos.
+
+- **Presentation**: responsável por implementar as interfaces de comunicação com o usuário.
 
 ## Tecnologias Utilizadas
 
