@@ -1,6 +1,6 @@
 import { Request, Router } from 'express'
 import { FindBeerSqlRepository } from '../beer/infra/repository/sql/find-beer'
-import { prismaClient } from '../core/db/sql/prisma-client'
+import { prismaClient } from '../core/database/sql/prisma-client'
 import { CreateOrderHandlerImpl } from './application/command/create-order'
 import { CreateOrderSqlRepository } from './infra/repository/sql/create-order'
 import { CreateOrderControllerImpl } from './presentation/controller/create-order'

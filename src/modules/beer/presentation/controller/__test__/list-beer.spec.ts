@@ -27,6 +27,8 @@ describe('ListBeerControllerImpl', () => {
 				page: 1,
 				limit: 10,
 			},
+			body: undefined,
+			params: undefined,
 		}
 
 		const response = {
@@ -89,6 +91,8 @@ describe('ListBeerControllerImpl', () => {
 			query: {
 				page: -10,
 			},
+			body: undefined,
+			params: undefined,
 		}
 
 		const result = await sut.execute(request)

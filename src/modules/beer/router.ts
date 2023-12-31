@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express'
-import { BeerModel } from '../core/db/nosql/schema'
+import { BeerModel } from '../core/database/nosql/schema'
 import { FindBeerHandlerImpl } from './application/query/find-beer'
 import { ListBeerHandlerImpl } from './application/query/list-beer'
 import { FindBeerControllerImpl } from './presentation/controller/find-beer'

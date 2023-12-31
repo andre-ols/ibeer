@@ -1,4 +1,4 @@
-import { BeerModel } from '@/modules/core/db/nosql/schema'
+import { BeerModel } from '@/modules/core/database/nosql/schema'
 import { Pagination } from '../../../core/querying/pagination'
 
 export class ListBeerQuery {

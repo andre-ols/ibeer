@@ -52,6 +52,7 @@ export class Beer {
 			id: this.id,
 			name: this.name,
 			description: this.description,
+			price: this.price,
 			imageUrl: this.imageUrl,
 			abv: this.abv.getValue(),
 			ibu: this.ibu.getValue(),

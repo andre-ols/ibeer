@@ -9,6 +9,9 @@ import {
 } from '@/modules/beer/application/event/created-beer'
 import { FindCategoryHandlerImpl } from '@/modules/beer/application/query/find-category'
 import { CreateBeerSqlRepository } from '@/modules/beer/infra/repository/sql/create-beer'
+import { mongoService } from '@/modules/core/database/nosql/mongo-service'
+import { BeerModel } from '@/modules/core/database/nosql/schema'
+import { env } from '@/modules/core/env'
 import { eventBus } from '@/modules/core/event-bus'
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'crypto'
@@ -16,7 +19,7 @@ const prisma = new PrismaClient()
 
 console.log('Seeding...')
 
-const eventHandler = new CreatedBeerHandlerImpl()
+const eventHandler = new CreatedBeerHandlerImpl(BeerModel)
 
 eventBus.subscribe(CreatedBeerEvent, (event) => eventHandler.execute(event))
 
@@ -84,8 +87,14 @@ async function saveBeer() {
 }
 
 async function main() {
+	await mongoService.connect(env.MONGO_URL)
+	await mongoService.dropCollection('beers')
 	await saveBeer()
 	console.log('Seeding finished!')
+
+	setTimeout(() => {
+		process.exit(0)
+	}, 1000)
 }
 
 main()

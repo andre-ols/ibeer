@@ -2,10 +2,11 @@ import 'module-alias/register'
 
 import { beerRouter } from './modules/beer/router'
 import { app } from './modules/core/api/http/express'
-import { connect } from './modules/core/db/nosql/connection'
+import { mongoService } from './modules/core/database/nosql/mongo-service'
+import { env } from './modules/core/env'
 import { orderRouter } from './modules/order/router'
 
-connect()
+mongoService.connect(env.MONGO_URL)
 
 app.use('/beer', beerRouter)
 

@@ -1,10 +1,11 @@
-import { BeerModel } from '@/modules/core/db/nosql/schema'
+import { BeerModel } from '@/modules/core/database/nosql/schema'
 import { BaseEvent } from '@/modules/core/event-bus'
 
 type Data = {
 	id: string
 	name: string
 	description: string
+	price: number
 	imageUrl: string
 	abv: number
 	ibu: number
@@ -33,6 +34,8 @@ export interface CreatedBeerHandler {
 }
 
 export class CreatedBeerHandlerImpl implements CreatedBeerHandler {
+	constructor(private readonly beerModel: typeof BeerModel) {}
+
 	count = 0
 	async execute(event: CreatedBeerEvent): Promise<void> {
 		const { data } = event
@@ -41,7 +44,7 @@ export class CreatedBeerHandlerImpl implements CreatedBeerHandler {
 
 		console.log('CreatedBeerHandlerImpl', ++this.count)
 
-		const beer = new BeerModel(data)
+		const beer = new this.beerModel(data)
 
 		await beer.save()
 	}

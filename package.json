@@ -28,7 +28,7 @@
     "typescript": "~5.1"
   },
   "scripts": {
-    "dev": "yarn --env-file=.env nodemon",
+    "dev": "yarn --env-file=.env nodemon --legacy-watch",
     "docker:up": "docker compose --env-file .env up -d --build --force-recreate app_dev",
     "docker:migrate": "docker compose --env-file .env exec app_dev yarn prisma migrate reset",
     "start": "node build/src/main.js",
