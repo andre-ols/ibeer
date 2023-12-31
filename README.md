@@ -1,32 +1,46 @@
-# ibeer - E-commerce de Cerveja Artesanal
+# iBeer - Craft Beer E-commerce
 
-Versão: 1.0.0
+![iBeer Logo](assets/ibeer/logo.png)
 
-## Descrição
+## Overview
 
-O **ibeer** é um e-commerce de cerveja artesanal desenvolvido em Node.js, utilizando as práticas avançadas de Domain Driven Design (DDD), CQRS e Clean Architecture. O projeto conta com dois bancos de dados, um para operações de escrita (PostgreSQL) e outro para operações de leitura (MongoDB). A harmonização desses bancos de dados é coordenada por um event bus customizado, promovendo consistência e integridade nos dados.
+**iBeer** is a craft beer e-commerce developed in Node.js, employing advanced practices of Domain Driven Design (DDD), CQRS, and Clean Architecture. The project features two databases, one for write operations (PostgreSQL) and another for read operations (MongoDB). The coordination between these databases is managed by a custom event bus, promoting consistency and integrity in the data.
 
-## Bounded Contexts
+## Table of Contents
 
-O **ibeer** é composto por 2 Bounded Contexts:
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Configuration](#configuration)
+  - [Start Containers](#start-containers)
+  - [Run Prisma Migrations](#run-prisma-migrations)
+- [License](#license)
 
-- **Beer**: responsável por gerenciar as cervejas do e-commerce.
+## Features
 
-- **Order**: responsável por gerenciar os pedidos de cerveja.
+- Craft beer commerce
+- Implementation of DDD, CQRS, and Clean Architecture
+- PostgreSQL for write operations
+- MongoDB for read operations
+- Data synchronization through a custom event bus
+- Containerized with Docker
+- Container management with Docker Compose
 
-## Estrutura do Projeto
+## Prerequisites
 
-O **ibeer** é composto por 4 camadas:
+Before starting, make sure you have Docker and Docker Compose installed on your environment.
 
-- **Application**: responsável por orquestrar as operações de negócio.
+## Project Structure
 
-- **Domain**: responsável por definir as regras de negócio.
+**iBeer** is composed of 4 layers:
 
-- **Infrastructure**: responsável por implementar as integrações com serviços externos.
+- **Application**: Responsible for orchestrating business operations.
+- **Domain**: Responsible for defining business rules.
+- **Infrastructure**: Responsible for implementing integrations with external services.
+- **Presentation**: Responsible for implementing user communication interfaces.
 
-- **Presentation**: responsável por implementar as interfaces de comunicação com o usuário.
-
-## Tecnologias Utilizadas
+Tech Stack:
 
 - Node.js
 - TypeScript
@@ -38,24 +52,26 @@ O **ibeer** é composto por 4 camadas:
 - Docker
 - Docker Compose
 
-## Instalação
+## Getting Started
 
-Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema.
+### Configuration
+
+Create a `.env` file at the root of the project with the necessary configurations, such as environment variables for database connections. Refer to the `.env.example` file for more details.
+
+### Start Containers
 
 ```bash
-# Clone o repositório
-git clone https://github.com/andre-ols/ibeer.git
-
-# Navegue até o diretório do projeto
-cd ibeer
-
-# Inicie os contêineres Docker
+# Start Docker containers
 docker compose --env-file .env up -d --build --force-recreate app_dev
+```
 
-# Rode as migrations do Prisma
+### Run Prisma Migrations
+
+```bash
+# Run Prisma migrations
 docker compose --env-file .env exec app_dev yarn prisma migrate reset
 ```
 
-## Configuração
+## License
 
-o **ibeer** utiliza PostgreSQL (ORM Prisma) para operações de escrita e MongoDB (ORM Mongoose) para leitura. Certifique-se de configurar corretamente as variáveis de ambiente no arquivo `.env` antes de iniciar o projeto. Veja o arquivo `.env.example` para mais detalhes.
+This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for details.
